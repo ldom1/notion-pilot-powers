@@ -1,0 +1,47 @@
+{
+  "name": "notion-pilot-powers",
+  "version": "0.1.0",
+  "description": "Run a Notion CRM from Claude Code — skills + optional local MCP (dedup, SIREN, dry-run writes).",
+  "author": {
+    "name": "Louis Giron",
+    "github": "ldom1"
+  },
+  "homepage": "https://github.com/ldom1/notion-pilot-powers",
+  "repository": "https://github.com/ldom1/notion-pilot-powers",
+  "license": "MIT",
+  "keywords": ["notion", "crm", "mcp", "sales", "pipeline"],
+  "skills": "./skills/",
+  "userConfig": {
+    "notion_token": {
+      "type": "string",
+      "title": "Notion integration token",
+      "description": "Internal integration token (ntn_… / secret_…). Optional — leave empty to use Notion hosted MCP only.",
+      "sensitive": true,
+      "required": false
+    },
+    "people_data_source_id": {
+      "type": "string",
+      "title": "People data source ID",
+      "description": "Notion data source ID for People (optional local MCP).",
+      "required": false
+    },
+    "companies_data_source_id": {
+      "type": "string",
+      "title": "Companies data source ID",
+      "description": "Notion data source ID for Companies (optional local MCP).",
+      "required": false
+    },
+    "deals_database_id": {
+      "type": "string",
+      "title": "Deals / Leads database ID",
+      "description": "Notion database ID for Deals/Leads (optional local MCP).",
+      "required": false
+    },
+    "activities_database_id": {
+      "type": "string",
+      "title": "Activities database ID",
+      "description": "Notion database ID for Activities (optional local MCP).",
+      "required": false
+    }
+  }
+}
