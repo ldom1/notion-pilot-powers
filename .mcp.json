@@ -4,7 +4,7 @@
       "command": "uvx",
       "args": [
         "--from",
-        "git+https://github.com/ldom1/notion-pilot-powers@bae4f541e014ba176c28329100eb79bacb897537",
+        "git+https://github.com/ldom1/notion-pilot-powers@c2b8f60973684cc255f022edb1b2a73cdd61ab3b",
         "notion-pilot-powers"
       ],
       "env": {
