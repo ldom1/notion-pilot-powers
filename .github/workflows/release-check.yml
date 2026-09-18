@@ -1,0 +1,18 @@
+name: release-check
+on:
+  push:
+    tags: ['v*']
+jobs:
+  pin:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+      - name: Tag tip must only change .mcp.json and pin HEAD~1
+        run: |
+          changed=$(git diff --name-only HEAD~1 HEAD)
+          echo "$changed"
+          test "$changed" = ".mcp.json"
+          pin=$(python3 -c "import json;print(json.load(open('.mcp.json'))['mcpServers']['notion-pilot-powers']['args'][1].split('@')[-1])")
+          test "$pin" = "$(git rev-parse HEAD~1)"

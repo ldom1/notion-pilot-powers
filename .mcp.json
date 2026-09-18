@@ -1,0 +1,19 @@
+{
+  "mcpServers": {
+    "notion-pilot-powers": {
+      "command": "uvx",
+      "args": [
+        "--from",
+        "git+https://github.com/ldom1/notion-pilot-powers@c2b8f60973684cc255f022edb1b2a73cdd61ab3b",
+        "notion-pilot-powers"
+      ],
+      "env": {
+        "NOTION_TOKEN": "${user_config.notion_token}",
+        "NOTION_PEOPLE_DATA_SOURCE_ID": "${user_config.people_data_source_id}",
+        "NOTION_COMPANIES_DATA_SOURCE_ID": "${user_config.companies_data_source_id}",
+        "NOTION_DEALS_DATABASE_ID": "${user_config.deals_database_id}",
+        "NOTION_ACTIVITIES_DATABASE_ID": "${user_config.activities_database_id}"
+      }
+    }
+  }
+}
