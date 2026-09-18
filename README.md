@@ -1,6 +1,6 @@
 # notion-pilot-powers
 
-CRM skills + optional local MCP for [Notion Pilot](https://github.com/ldom1/notion-pilot).
+CRM skills + optional local MCP for [Notion Pilot](https://notion-pilot.com).
 
 ## Install (Claude Code)
 
@@ -36,7 +36,3 @@ uvx --from git+https://github.com/ldom1/notion-pilot-powers@<release-sha> notion
 ### Where your data goes
 
 > **Where your data goes.** Your CRM records are stored in your Notion workspace. On the **Notion Enterprise plan**, Notion can host that workspace in the EU (Frankfurt); on other plans, Notion stores it in its default region (US). Region and terms are set by your agreement with Notion ([details](https://www.notion.com/help/data-residency)). EU hosting covers CRM data stored in Notion, not AI processing. When your assistant reads CRM records, that content is processed by your assistant's provider (e.g. Anthropic for Claude), under the provider's data processing terms; Notion's residency does not cover it. Notion states that some of its own AI processing can also happen outside the residency region. notion-pilot.com deploys the CRM structure and keeps no CRM records and no Notion access token.
-
-## Developers
-
-Self-host capture channels (Telegram, email, Discord) live in the [notion-pilot wiki](https://github.com/ldom1/notion-pilot/wiki/Self-host).
