@@ -31,8 +31,9 @@ One row per material claim. A material claim is a fact that changes the qualific
 
 - **Fact** — read from an official record, with a reference link.
 - **Fact (company claim)** — stated by the company on its own site or in its own press release. It is a fact that the company says it, not that it is true. Give the deep link when one exists.
+- **Fact (CRM)** — written on a Lead, Activity or Meeting in the CRM, with a Notion link.
 - **Interpretation** — inferred from facts, or read from press, web or a name match.
-- **Unknown** — searched but not found, or the source failed.
+- **Unknown** — searched but not found, or the source failed. For buying needs, compute needs, RFPs or partners: only after `crm` was queried (or logged not available).
 
 Rules:
 
@@ -68,6 +69,7 @@ Status values:
 - **Default criteria:** company active; sector fit; size fit; no open collective procedure; recent growth, hiring or contract signals.
 - Size fit: assess the legal entity. If it belongs to a group (`categorie_entreprise` ETI or GE with a small headcount), also assess the group, as an Interpretation.
 - Mark a criterion "not assessed" when no ICP or no data allows it. With a "not assessed" criterion, the best verdict is "Pursue after checks".
+- Do not mark a criterion "not assessed" or Unknown for compute / buying pain if a CRM Lead or Activity already states it. Prefer **Fact (CRM)** over open-data silence.
 - **Evidence:** for each criterion, the matching claims and their labels.
 - **What could make this wrong:** the weakest evidence, and the data you could not get.
 - **Verify before outreach:** the checks the user must do first. If the NAF is 70.10Z (head office or holding), say that the buyer can be a subsidiary.

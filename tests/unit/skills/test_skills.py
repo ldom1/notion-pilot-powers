@@ -111,11 +111,15 @@ def test_brief_template_has_evidence_sections() -> None:
     for label in (
         "Fact",
         "Fact (company claim)",
+        "Fact (CRM)",
         "Fact (current state)",
         "Interpretation",
         "Unknown",
     ):
         assert f"**{label}**" in text or f'"{label}"' in text, label
+    assert "## `crm`" in SOURCES.read_text(encoding="utf-8")
+    skill = (ENRICH / "SKILL.md").read_text(encoding="utf-8")
+    assert "query the **`crm`** source" in skill and "**before** you mark" in skill
 
 
 def test_evals_are_well_formed() -> None:

@@ -2,6 +2,11 @@
 
 ## [Unreleased]
 
+## [0.2.2] - 2026-10-06
+
+### Fixed
+- Lead brief: query Notion CRM (`crm` source — Leads, Activities, Meetings) before marking a buying or compute need Unknown; BOAMP empty does not mean no private RFP.
+
 ## [0.2.1] - 2026-10-06
 
 ### Fixed

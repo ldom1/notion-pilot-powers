@@ -120,6 +120,26 @@ Log every source in the retrieval log, also when you did not query it. Read ever
 - When the company is the buyer, report its purchases as a separate signal: it buys these services. Never call them contracts won.
 - A gap in dates can come from the dataset, not from the company. Say so. Do not conclude "no activity".
 - A search by name (`search(titulaire,"<name>")`) is an Interpretation, never a Fact.
+- **BOAMP empty ≠ no tender.** Private RFPs, partner-led bids and co-selling deals do not appear here. Check `crm` before you say there is no procurement activity.
+
+## `crm`
+
+**What it gives:** prior CRM knowledge for this company — Leads (stage, product, next step, notes), Activities (meetings, outcomes), Meetings, and related People. Often the only evidence of compute needs, private RFPs, or partners (for example a cloud partner).
+
+**Query:** when a Notion Company page (or company name in the CRM) is in scope:
+1. Search the workspace for the company name and SIREN.
+2. Open every Lead whose Client/Company relation is this company.
+3. Open linked Activities and Meetings (and any Meeting pages that mention the company).
+4. Read Stage, Product, Next Step, Notes, and activity Notes/Outcome.
+
+**As-of filter:** keep events dated on or before the as-of date. Undated CRM notes are "date unknown"; still use them for qualification, labelled accordingly.
+
+**Reference link:** the Notion URL of the Lead, Activity or Meeting.
+
+**Caveats:**
+- Label CRM rows **Fact (CRM)** when the claim is written in the CRM record. User statements in the current chat that are not in the CRM are Interpretation (or Fact if the user asks you to treat them as given).
+- Never mark a buying need, compute/HPC need, RFP or partner relationship **Unknown** until you have queried `crm` (or logged it `not available` / `not applicable`).
+- An empty BOAMP or RSS result does not cancel a CRM Lead or Activity on the same topic.
 
 ## `rss`
 
