@@ -1,0 +1,6 @@
+{
+  "stages": ["main"],
+  "tag_prefix": "v",
+  "gate": [["uv", "run", "--dev", "pytest", "-q"], ["uv", "run", "ruff", "check", "notion_pilot_powers", "tests"]],
+  "changelog": "CHANGELOG.md"
+}
