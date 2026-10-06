@@ -1,0 +1,88 @@
+{
+  "skill_name": "company-enrichment",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Brief on SIREN 552100554 as of 2020-06-30 before I contact them.",
+      "expected_output": "Brief for PEUGEOT SA, active on 2020-06-30, with BODACC events dated on or before 2020-06-30 only.",
+      "files": [],
+      "expectations": [
+        "Identity is confirmed from the SIREN",
+        "The company is reported active on 2020-06-30",
+        "No timeline event is dated after 2020-06-30",
+        "Every Fact row has a reference link",
+        "The retrieval log lists recherche-entreprises, bodacc, boamp, rss and web-search",
+        "Managers, if listed, have no birth date"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Should I prospect SIREN 552100554 today?",
+      "expected_output": "PEUGEOT SA is closed since 2021-01-16; verdict Do not pursue.",
+      "files": [],
+      "expectations": [
+        "The closure date 2021-01-16 is stated",
+        "The verdict is Do not pursue",
+        "The BODACC radiation notice is in the timeline with its link"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Fais-moi un brief sur Dupont avant que je les appelle.",
+      "expected_output": "Several candidates listed in French; no brief written.",
+      "files": [],
+      "expectations": [
+        "The answer is in French",
+        "Up to 5 candidates are listed with SIREN, city, NAF and state",
+        "The user is asked to choose",
+        "No qualification verdict is given"
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "Brief on SIREN 552100554 as of 1950-01-01.",
+      "expected_output": "The company did not exist yet on that date (created 1955-01-01).",
+      "files": [],
+      "expectations": [
+        "The creation date is compared with the as-of date",
+        "The brief stops with that finding",
+        "No qualification verdict is given"
+      ]
+    },
+    {
+      "id": 5,
+      "prompt": "Brief on SIREN 110000445 as of 2020-12-31, including public contracts.",
+      "expected_output": "BOAMP notices are labelled by role; notices where the SIREN is the buyer are not counted as won contracts.",
+      "files": [],
+      "expectations": [
+        "Each BOAMP notice has a role: buyer, winner or unclear",
+        "No notice where the company is the buyer is counted as a won contract",
+        "Each BOAMP notice has its url_avis link"
+      ]
+    },
+    {
+      "id": 6,
+      "prompt": "Brief on SIREN 552100554 as of 2019-01-01, with press coverage.",
+      "expected_output": "RSS feeds are logged not applicable for a 2019 date; press comes from web search, labelled Interpretation.",
+      "files": [],
+      "expectations": [
+        "RSS is logged not applicable, not as no news",
+        "Press items are labelled Interpretation",
+        "No press item is dated after 2019-01-01"
+      ]
+    },
+    {
+      "id": 7,
+      "prompt": "Write the brief on SIREN 552100554 as of 2020-06-30 to its Notion Company page.",
+      "expected_output": "Preview first, wait for go; brief goes to the page body; properties are not overwritten with older years.",
+      "files": [],
+      "expectations": [
+        "A preview is shown before any Notion write",
+        "No Notion write happens without an explicit go",
+        "The brief is appended to the page body under a dated heading",
+        "No property is overwritten with an older year",
+        "A missing property is proposed, not created without validation"
+      ]
+    }
+  ]
+}
