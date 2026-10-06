@@ -138,3 +138,26 @@ def test_notion_write_guards() -> None:
     assert "group" in _sections(ENRICH / "references" / "brief.md")["Lead qualification"]
     for text in (brief, (ENRICH / "SKILL.md").read_text(encoding="utf-8")):
         assert 'titled "ICP"' not in text  # the overlay defines where the ICP lives
+
+
+PERSON = ROOT / "skills" / "person-enrichment"
+PERSON_SOURCES = PERSON / "references" / "sources.md"
+
+
+def test_person_sources_have_required_fields() -> None:
+    sources = {k: v for k, v in _sections(PERSON_SOURCES).items() if k.startswith("`")}
+    expected = {"`crm`", "`company-site`", "`linkedin-public`", "`recherche-entreprises`", "`web-search`"}
+    assert expected <= set(sources)
+    for name, body in sources.items():
+        for field in SOURCE_FIELDS:
+            assert f"**{field}:**" in body, f"{name} lacks {field}"
+
+
+def test_person_brief_properties_are_documented_in_crm_ops() -> None:
+    person = (PERSON / "references" / "person.md").read_text(encoding="utf-8")
+    line = next(ln for ln in person.splitlines() if "Strongly expected:" in ln or "strongly expected:" in ln.lower() or ln.strip().startswith("2. Create"))
+    people = (ROOT / "skills" / "crm-ops" / "references" / "people.md").read_text(encoding="utf-8")
+    for prop in ("Name", "Company", "Email - pro", "Linkedin", "Position", "Seniority", "Role Type", "Phone"):
+        assert prop in person, prop
+        assert prop in people or prop.replace(" - pro", "") in people, prop
+

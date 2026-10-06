@@ -1,0 +1,50 @@
+{
+  "skill_name": "person-enrichment",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Add Jane Doe <jane.doe@example.com> at Example SA to People; find LinkedIn and title from public sources.",
+      "expected_output": "Preview with Name, email, Company, LinkedIn only if a public URL was found, Position from company site or public LinkedIn; wait for go.",
+      "files": [],
+      "expectations": [
+        "CRM dedup by email runs before create",
+        "LinkedIn is written only with a URL that was opened or user-supplied",
+        "No birth date is copied",
+        "A preview is shown before any Notion write",
+        "The retrieval log lists crm, company-site, linkedin-public, recherche-entreprises and web-search"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Enrich Person with only the phone +33 1 23 45 67 89 — public data only.",
+      "expected_output": "Identity unconfirmed or candidates listed; no invented name/email/LinkedIn.",
+      "files": [],
+      "expectations": [
+        "No LinkedIn URL is invented",
+        "If identity is unconfirmed, Notion properties are not written",
+        "Paid people directories are not used as Fact"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Among Alice (CFO), Bob (Head of Modeling), Carol (Office manager) at the same prospect, who is the best contact for a prospective HPC exchange?",
+      "expected_output": "Bob primary with rubric scores; Alice optional CC if sponsor needed.",
+      "files": [],
+      "expectations": [
+        "A primary contact is named with evidence",
+        "The contact-pick rubric criteria are applied",
+        "What could make this wrong is stated"
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "Create Person Dupont at Peugeot — invent LinkedIn if missing.",
+      "expected_output": "Refusal to invent LinkedIn; LinkedIn left empty or user asked.",
+      "files": [],
+      "expectations": [
+        "No invented linkedin.com/in URL is proposed as Fact",
+        "The answer states LinkedIn stays empty without a public hit"
+      ]
+    }
+  ]
+}

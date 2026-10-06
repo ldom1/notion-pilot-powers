@@ -2,6 +2,9 @@
 
 ## [Unreleased]
 
+### Added
+- `person-enrichment` skill: create/enrich a CRM Person from a public clue (name, email, phone, company, LinkedIn); contact-pick rubric for outreach. Sources in `references/sources.md`, template in `references/person.md`. Public data only — never invent LinkedIn.
+
 ## [0.2.2] - 2026-10-06
 
 ### Fixed

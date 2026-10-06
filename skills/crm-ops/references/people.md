@@ -31,4 +31,4 @@ Upsert **skip** on exact match does **not** fill empty LinkedIn/position — pat
 
 ## Enrichment
 
-Web/LinkedIn research for missing strongly-expected fields. Label `source=web|user`. Never invent URLs.
+Use **`person-enrichment`** for create/enrich from a public clue and for best-contact ranking. Label sources per that skill. Never invent URLs.
