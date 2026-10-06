@@ -2,6 +2,14 @@
 
 ## [Unreleased]
 
+## [0.2.1] - 2026-10-06
+
+### Fixed
+- Lead brief Notion write: read the live select options before proposing `Sector` or `Size`; never write an option the database lacks.
+- A current property value with no year (for example `Size` without `Année effectif`) is shown next to the new value and never overwritten by default.
+- Size fit also assesses the group when the company is part of one; a readable malformed RSS feed is not `failed`.
+- The ICP comes from the user or from where the workspace overlay points (page or database), no longer from a page titled "ICP".
+
 ## [0.2.0] - 2026-10-06
 
 ### Added
