@@ -108,6 +108,14 @@ def test_brief_template_has_evidence_sections() -> None:
         assert f"## {heading}" in text
     assert "| Claim | Label | Source | Event date | Retrieved | Reference |" in text
     assert "birth date" in text
+    for label in (
+        "Fact",
+        "Fact (company claim)",
+        "Fact (current state)",
+        "Interpretation",
+        "Unknown",
+    ):
+        assert f"**{label}**" in text or f'"{label}"' in text, label
 
 
 def test_evals_are_well_formed() -> None:

@@ -30,6 +30,7 @@ One row per material claim. A material claim is a fact that changes the qualific
 |---|---|---|---|---|---|
 
 - **Fact** — read from an official record, with a reference link.
+- **Fact (company claim)** — stated by the company on its own site or in its own press release. It is a fact that the company says it, not that it is true. Give the deep link when one exists.
 - **Interpretation** — inferred from facts, or read from press, web or a name match.
 - **Unknown** — searched but not found, or the source failed.
 
@@ -50,7 +51,7 @@ One row per source in `sources.md`.
 Status values:
 
 - `queried` — the source returned data.
-- `empty` — the source answered with no result.
+- `empty` — the source answered, but no record matches the company. Use it also when you read the RSS feeds and none mentions the company.
 - `failed` — error or timeout. Give the error.
 - `not applicable` — the source cannot cover the as-of date. Give the reason.
 - `not available` — no tool to reach the source.

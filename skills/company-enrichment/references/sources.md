@@ -29,6 +29,7 @@ Log every source in the retrieval log, also when you did not query it. Read ever
 - Always give the headcount band with `annee_tranche_effectif_salarie`. If the year is missing, say so.
 - If that year is on or after the as-of year, label the band "current state, after the as-of date". Do not use it to qualify the lead.
 - Label managers, address and NAF "current state" when the as-of date is before today.
+- `categorie_entreprise` (PME, ETI, GE) is computed at group level. A small headcount with ETI or GE means the company belongs to a larger group. Say so in "Conflicts and stale data"; do not call it a conflict about size.
 
 **Headcount codes** (`tranche_effectif_salarie`). Write the INSEE band in the brief. Use the `Size` option for Notion. The option is approximate: it matches `lookup_siren`. Leave `Size` empty for `NN`.
 
@@ -152,14 +153,14 @@ To add a feed, add one row.
 
 **What it gives:** press, company pages, announcements not in the official sources.
 
-**Query:** `"<name>" <SIREN>` first. Then `"<name>" <head office city>`.
+**Query:** first find the official website: `"<name>" <NAF activity label>`, for example `"Calogena" ingénierie énergie`. Then `"<name>" <SIREN>` and `"<name>" <head office city>`. A name alone often returns homonyms.
 
 **As-of filter:** keep results with a visible publication date on or before the as-of date. Drop results without a date, or log them as "date unknown".
 
 **Reference link:** the page URL.
 
 **Caveats:**
-- A result is an Interpretation unless it is an official source or the company's own page.
+- A result is an Interpretation unless it is an official source. A statement on the company's own page is a "Fact (company claim)".
 - Search tools often show no date. Open the page to find its date. No dated page, no claim.
 - Ignore the search tool's summary text. It can contain events after the as-of date.
 - Check that the page names the same company (SIREN, city or activity).
