@@ -40,10 +40,11 @@ Sources: `references/sources.md`. Output: `references/brief.md`.
 2. Confirm the identity. Use the SIREN first: from the user, the Notion page, `lookup_siren`, or recherche-entreprises. If a name matches more than one company, apply the stop rule in `references/brief.md`.
 3. Check that the company existed on the as-of date. If it did not, say so and stop. If it was closed on that date, query recherche-entreprises and BODACC only. Give the closure evidence and the verdict "Do not pursue". Log the other sources "not applicable: company closed".
 4. Get the ICP. Look in this order: the user message, then the ICP that the workspace overlay skill points to (a page or a database). If you find none, use the default criteria in `references/brief.md` and say so.
-5. Query each source in `references/sources.md`. Apply its as-of filter. Log every attempt in the retrieval log.
-6. Record each material claim with its label (Fact, Interpretation, Unknown), source, event date, retrieval date and reference link.
-7. List conflicts, stale data and failed retrievals. Then qualify the lead with explicit evidence.
-8. Write the brief in the user's language, with the template in `references/brief.md`. Offer the Notion write.
+5. If the brief is for a Notion Company (or the user names a CRM company), query the **`crm`** source in `references/sources.md` **before** you mark any buying need, compute need, or outreach signal as Unknown. Read linked Leads, Activities and Meetings.
+6. Query each other source in `references/sources.md`. Apply its as-of filter. Log every attempt in the retrieval log.
+7. Record each material claim with its label (Fact, Interpretation, Unknown), source, event date, retrieval date and reference link.
+8. List conflicts, stale data and failed retrievals. Then qualify the lead with explicit evidence. CRM claims override an open-data "Unknown" on the same topic.
+9. Write the brief in the user's language, with the template in `references/brief.md`. Offer the Notion write.
 
 ## Rules
 

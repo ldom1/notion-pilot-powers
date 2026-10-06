@@ -11,7 +11,7 @@
         "The company is reported active on 2020-06-30",
         "No timeline event is dated after 2020-06-30",
         "Every Fact row has a reference link",
-        "The retrieval log lists recherche-entreprises, bodacc, boamp, rss and web-search",
+        "The retrieval log lists recherche-entreprises, bodacc, boamp, rss, web-search and crm when a CRM company is in scope",
         "Managers, if listed, have no birth date"
       ]
     },
