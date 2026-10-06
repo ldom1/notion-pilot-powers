@@ -36,7 +36,7 @@ If local API cannot see Companies DS, use Notion MCP create/update on the compan
 
 ## Financials (Finance section)
 
-Source: `company-open-data-enrichment` skill, RNE `finances` data (`recherche-entreprises.api.gouv.fr` queried by SIREN). Gated on a high-confidence SIREN — see that skill's Identity confidence gates.
+Source: `company-enrichment` skill, RNE `finances` data (`recherche-entreprises.api.gouv.fr` queried by SIREN). Gated on a high-confidence SIREN — see that skill's Identity confidence gates.
 
 | Field | Notion property | Notes |
 |-------|-----------------|-------|
@@ -44,8 +44,9 @@ Source: `company-open-data-enrichment` skill, RNE `finances` data (`recherche-en
 | Résultat net | `Résultat net` | Number, Euro format; can be negative |
 | Marge nette | `Marge nette %` | Number, Percent format; blank when CA is 0/missing, can be negative |
 | Année financière | `Année financière` | Number; the filed year these three refer to |
+| Année effectif | `Année effectif` | Number; the year of the `Size` headcount band (same write path) |
 
-**Write path:** these 4 properties are **Notion-MCP-only writes** — `upsert_companies` (create-time only) and `enrich_companies` (fill-empty-only, never refreshes) don't fit data that must refresh annually, so `company-open-data-enrichment` writes them directly via Notion MCP page-update instead, always overwriting with the freshest filed year (never an older one, and never into a mismatched-type existing property — see that skill's stale-source and type-conflict guards).
+**Write path:** these properties are **Notion-MCP-only writes** — `upsert_companies` (create-time only) and `enrich_companies` (fill-empty-only, never refreshes) don't fit data that must refresh annually, so `company-enrichment` writes them directly via Notion MCP page-update instead, always overwriting with the freshest filed year (never an older one, and never into a mismatched-type existing property — see that skill's stale-source and type-conflict guards).
 
 **Grouping:** Notion's API can't create the "Finance" section grouping itself (UI/layout-only feature) — group these 4 properties manually in the page layout builder once, after they're first created.
 

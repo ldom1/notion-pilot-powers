@@ -16,7 +16,7 @@ One plugin, two skills. **Notion hosted MCP is required** for the default path. 
 | Skill | When |
 |---|---|
 | `crm-ops` | Create/update leads, log activities, upsert people/companies, search CRM |
-| `company-enrichment` | Fill SIREN / sector / size / open-data fields on a company |
+| `company-enrichment` | Fill SIREN / sector / size / open-data fields on a company, or build a dated lead brief |
 
 ## Prerequisites
 
