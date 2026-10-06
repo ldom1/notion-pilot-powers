@@ -38,8 +38,8 @@ Property shapes: `crm-ops/references/people.md`.
 
 | Title signals | Seniority |
 |---|---|
-| Fondateur, Co-founder, Président (founder) | `founder` |
-| CEO, CTO, COO, DG, Gérant (exec) | `c_suite` |
+| Fondateur, Co-founder (only when a source says so) | `founder` |
+| CEO, CTO, COO, DG, Gérant, Président (legal role of a SAS) | `c_suite` |
 | VP, SVP | `vp` |
 | Directeur, Director, Head of | `director` |
 | Manager, Responsible, Lead (people mgr) | `manager` |

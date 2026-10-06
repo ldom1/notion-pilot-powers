@@ -29,7 +29,7 @@ Two modes:
 
 **Input:** any one or more of: full name, first/last name, email, phone, company name, LinkedIn URL, title.
 
-**In scope:** `Name`, `Company`, `Email - pro`, `Linkedin`, `Position`, `Seniority`, `Role Type`, `Phone` when evidenced from public sources in `references/sources.md`.
+**In scope:** `Name`, `Company`, `Email - pro`, `Linkedin`, `Position`, `Seniority`, `Role Type`, `Phone` when evidenced from public sources in `references/sources.md`. Professional data only: see "Data protection".
 
 **Out of scope:** birth date, home address, private emails, photos, paid data brokers, inventing URLs or titles, schema changes without validation.
 
@@ -43,7 +43,7 @@ Two modes:
 6. Show the preview table (current vs proposed). Write only after explicit go.
 7. Optionally append a short enrichment note on the Person page body (template in `references/person.md`).
 
-**Confidence:** write LinkedIn / email / phone only with a reference link. Never invent a LinkedIn URL from a name guess.
+**Confidence:** write LinkedIn / email / phone only with a reference link. Never invent a LinkedIn URL from a name guess. Never build an email from a naming pattern (`firstname.lastname@<domain>`) and present it as a Fact: propose it as an Interpretation, and never write it to `Email - pro`.
 
 ## Contact pick
 
@@ -51,6 +51,17 @@ Two modes:
 2. Score with the rubric in `references/person.md` against the user's goal (default: prospective technical/commercial exchange).
 3. Rank with evidence. Name one **primary** and optional **CC**. State what could make the pick wrong.
 4. If a better public contact exists at the company (team page) but is not in the list, name them as Interpretation — do not create them without go.
+
+## Data protection
+
+These rules apply to every person, in the EU and elsewhere.
+
+- Collect professional data only: work email, work phone, current role, employer, public professional profile.
+- `Phone`: write only a published work number (switchboard or a work line on an employer or professional page). Never write a personal mobile found elsewhere.
+- `Email - pro`: never write a personal address (gmail, outlook.com, orange.fr …) unless the user supplied it for this purpose.
+- Keep the source link of every written field in the preview and in the optional page note.
+- If the user says the person objected or asked for deletion, stop: do not enrich, and tell the user to remove the data.
+- Collect only what the outreach goal needs. Do not add a field because it is available.
 
 ## Rules
 

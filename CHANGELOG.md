@@ -2,8 +2,11 @@
 
 ## [Unreleased]
 
+## [0.3.0] - 2026-10-06
+
 ### Added
 - `person-enrichment` skill: create/enrich a CRM Person from a public clue (name, email, phone, company, LinkedIn); contact-pick rubric for outreach. Sources in `references/sources.md`, template in `references/person.md`. Public data only — never invent LinkedIn.
+- `person-enrichment` data protection rules: professional data only, published work phone only, no personal email unless user-supplied, never an email built from a naming pattern, stop on objection or deletion request. A SAS « Président » maps to `c_suite`, not `founder`.
 
 ## [0.2.2] - 2026-10-06
 
