@@ -39,7 +39,7 @@ Sources: `references/sources.md`. Output: `references/brief.md`.
 1. Get the as-of date. If the user gives none, use today. Reject a future date.
 2. Confirm the identity. Use the SIREN first: from the user, the Notion page, `lookup_siren`, or recherche-entreprises. If a name matches more than one company, apply the stop rule in `references/brief.md`.
 3. Check that the company existed on the as-of date. If it did not, say so and stop. If it was closed on that date, query recherche-entreprises and BODACC only. Give the closure evidence and the verdict "Do not pursue". Log the other sources "not applicable: company closed".
-4. Get the ICP. Look in this order: the user message, the workspace overlay skill, a Notion page titled "ICP". If you find none, use the default criteria in `references/brief.md` and say so.
+4. Get the ICP. Look in this order: the user message, then the ICP that the workspace overlay skill points to (a page or a database). If you find none, use the default criteria in `references/brief.md` and say so.
 5. Query each source in `references/sources.md`. Apply its as-of filter. Log every attempt in the retrieval log.
 6. Record each material claim with its label (Fact, Interpretation, Unknown), source, event date, retrieval date and reference link.
 7. List conflicts, stale data and failed retrievals. Then qualify the lead with explicit evidence.

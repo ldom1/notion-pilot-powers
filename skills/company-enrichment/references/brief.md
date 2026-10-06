@@ -52,7 +52,7 @@ Status values:
 
 - `queried` — the source returned data.
 - `empty` — the source answered, but no record matches the company. Use it also when you read the RSS feeds and none mentions the company.
-- `failed` — error or timeout. Give the error.
+- `failed` — error or timeout, or a response you cannot read. Give the error. A malformed feed that you can still read is `empty` or `queried`, with a note.
 - `not applicable` — the source cannot cover the as-of date. Give the reason.
 - `not available` — no tool to reach the source.
 
@@ -64,8 +64,9 @@ Status values:
 ## Lead qualification
 
 - **Verdict:** Pursue, Pursue after checks, Hold, or Do not pursue.
-- **Criteria:** the ICP used, and where it comes from (user, workspace overlay, Notion "ICP" page, or default criteria).
+- **Criteria:** the ICP used, and where it comes from (user, workspace overlay, or default criteria).
 - **Default criteria:** company active; sector fit; size fit; no open collective procedure; recent growth, hiring or contract signals.
+- Size fit: assess the legal entity. If it belongs to a group (`categorie_entreprise` ETI or GE with a small headcount), also assess the group, as an Interpretation.
 - Mark a criterion "not assessed" when no ICP or no data allows it. With a "not assessed" criterion, the best verdict is "Pursue after checks".
 - **Evidence:** for each criterion, the matching claims and their labels.
 - **What could make this wrong:** the weakest evidence, and the data you could not get.
@@ -84,4 +85,6 @@ Follow `crm-ops` write discipline.
 4. Fill only these properties, and only from a Fact: `SIREN`, `Sector`, `Size`, `Année effectif`, `CA`, `Résultat net`, `Marge nette %`, `Année financière`.
 5. `Année financière` is the fiscal year of `CA`, `Résultat net` and `Marge nette %`. `Année effectif` is the year of `Size`.
 6. Properties hold the latest known value. Skip a property when the page already has an equal or newer year. A brief for a past date goes to the page body only.
-7. If a property does not exist in the database, propose its name and type. Create it only after explicit validation. Types: `Année effectif` and `Année financière` are numbers; `CA` and `Résultat net` are euro numbers; `Marge nette %` is a percent number.
+7. A current value with no year (for example `Size` without `Année effectif`) may be human-entered. Show both values in the preview. Do not overwrite it unless the user chooses the new value.
+8. For a select property (`Sector`, `Size`), read the live select options of the database first. If the mapped option does not exist, show the mapped value and the closest live options. Write only the option the user chooses.
+9. If a property does not exist in the database, propose its name and type. Create it only after explicit validation. Types: `Année effectif` and `Année financière` are numbers; `CA` and `Résultat net` are euro numbers; `Marge nette %` is a percent number.

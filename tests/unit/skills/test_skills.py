@@ -124,3 +124,13 @@ def test_evals_are_well_formed() -> None:
     assert len(data["evals"]) >= 5
     for case in data["evals"]:
         assert case["prompt"] and case["expectations"]
+
+
+def test_notion_write_guards() -> None:
+    brief = (ENRICH / "references" / "brief.md").read_text(encoding="utf-8")
+    write = _sections(ENRICH / "references" / "brief.md")["Notion write"]
+    assert "live select options" in write  # never write an option the database lacks
+    assert "no year" in write  # a value without a year may be human-entered
+    assert "group" in _sections(ENRICH / "references" / "brief.md")["Lead qualification"]
+    for text in (brief, (ENRICH / "SKILL.md").read_text(encoding="utf-8")):
+        assert 'titled "ICP"' not in text  # the overlay defines where the ICP lives

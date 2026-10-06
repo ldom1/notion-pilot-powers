@@ -52,7 +52,7 @@ Log every source in the retrieval log, also when you did not query it. Read ever
 | `52` | 5000-9999 | 2001-10000 |
 | `53` | 10000+ | 10000+ |
 
-**Sector** (from the NAF section letter, as `lookup_siren` does). J: `Telecom` if the NAF code starts with 61, else `Software`. M: `Research` if it starts with 72, else `Consulting`.
+**Sector** (from the NAF section letter, as `lookup_siren` does). These are the options the Notion Pilot wizard creates. A live database can use other options: see "Notion write" in `brief.md`. J: `Telecom` if the NAF code starts with 61, else `Software`. M: `Research` if it starts with 72, else `Consulting`.
 
 | NAF section | Sector option |
 |---|---|
