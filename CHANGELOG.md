@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+## [0.4.0] - 2026-10-07
+
 ### Changed
 - Lead brief is short and sales-first: Notion body = hook, interest signals, ICP score table (✅/🟡/❌/❔), max 5 checks; at most 25 blocks; a new brief replaces the old one (no addendum). Timeline, claims, retrieval log and conflicts stay in the chat preview.
 - Identity goes to Company properties: `NAF`, `Forme juridique`, `Siège`, `Date de création`, `Dirigeant`, `Fiche registre`, `Verdict ICP`, `Dernier brief`.
