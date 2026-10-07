@@ -1,13 +1,13 @@
 # Sources — lead brief
 
-Open data only. No source needs an API key.
+Open data only. Every automated source works without authentication: no account, no API key. Sources that need an account (INPI RNE, INPI patents and trademarks, France Travail) are out of scope.
 
 Each source has the same fields. To add a source, add one `## \`<id>\`` section with these five fields:
 
 - **What it gives** — the data you can read.
 - **Query** — the exact request. Replace `<SIREN>`, `<name>` and `<AS_OF>` (YYYY-MM-DD). URL-encode the `where` value, for example with `curl -G --data-urlencode`.
 - **As-of filter** — how to drop data that was not known on the as-of date.
-- **Reference link** — the link to put in the claims table.
+- **Reference link** — the link to put in the signals table.
 - **Caveats** — known limits. Read them before you write a claim.
 
 Log every source in the retrieval log, also when you did not query it. Read every returned record, not only the first ones.
@@ -120,7 +120,94 @@ Log every source in the retrieval log, also when you did not query it. Read ever
 - When the company is the buyer, report its purchases as a separate signal: it buys these services. Never call them contracts won.
 - A gap in dates can come from the dataset, not from the company. Say so. Do not conclude "no activity".
 - A search by name (`search(titulaire,"<name>")`) is an Interpretation, never a Fact.
-- **BOAMP empty ≠ no tender.** Private RFPs, partner-led bids and co-selling deals do not appear here. Check `crm` before you say there is no procurement activity.
+- **BOAMP empty ≠ no tender.** Also check `decp` and `ted`. Private RFPs, partner-led bids and co-selling deals do not appear here. Check `crm` before you say there is no procurement activity.
+
+## `decp`
+
+**What it gives:** public contracts awarded, from the buyers' own data (DECP): subject, buyer, amount, procedure, notification date. It also covers contracts below the BOAMP threshold.
+
+**Query:** `https://data.economie.gouv.fr/api/explore/v2.1/catalog/datasets/decp-v3-marches-valides/records?where=((titulaire_id_1>=<SIREN>00000 and titulaire_id_1<<SIREN+1>00000) or startswith(titulaire_id_2,"<SIREN>") or (titulaire_id_3>=<SIREN>00000 and titulaire_id_3<<SIREN+1>00000)) and datenotification <= date'<AS_OF>'&order_by=datenotification desc&limit=20&select=id,datenotification,objet,montant,acheteur_id,acheteur_nom,nature,procedure`
+
+`<SIREN+1>` is the SIREN plus one, as a number. `titulaire_id_1` and `titulaire_id_3` are numbers, `titulaire_id_2` is text: keep the query as written. For contracts the company buys, run `where=startswith(acheteur_id,"<SIREN>") and datenotification <= date'<AS_OF>'`.
+
+**As-of filter:** `datenotification <= date'<AS_OF>'` in the query.
+
+**Reference link:** `https://data.economie.gouv.fr/explore/dataset/decp-v3-marches-valides/table/?q=<id>`
+
+**Caveats:**
+- `acheteur_nom` is often null. Give `acheteur_id` (SIRET) and resolve the name with `recherche-entreprises` when it matters.
+- Buyers publish late or not at all. Empty does not mean no public contract.
+- When the company is the buyer, report its purchases as a separate signal. Never call them contracts won.
+
+## `ted`
+
+**What it gives:** EU public procurement notices above the EU thresholds, from all member states: contract awards, winners, buyers.
+
+**Query:** `POST https://api.ted.europa.eu/v3/notices/search` with the JSON body `{"query": "winner-name = \"<name>\" AND publication-date <= <AS_OF as YYYYMMDD> SORT BY publication-date DESC", "fields": ["publication-number", "publication-date", "notice-type", "notice-title", "buyer-name", "winner-name"], "limit": 20}`. For notices where the company buys, use `buyer-name = "<name>"`.
+
+**As-of filter:** `publication-date <= <AS_OF>` in the query.
+
+**Reference link:** `https://ted.europa.eu/fr/notice/-/detail/<publication-number>`
+
+**Caveats:**
+- The search is by name: a match is an Interpretation until the notice gives the SIREN or the address.
+- Use `=` (exact phrase), never `~`: `~` stems the name and returns unrelated notices.
+- Try the legal name and the brand name. Notices write names with different case and suffixes ("SAS").
+
+## `cordis`
+
+**What it gives:** EU-funded R&D projects (Horizon 2020, Horizon Europe) in which the company is a participant or coordinator: acronym, title, start and end dates.
+
+**Query:** SPARQL `GET https://cordis.europa.eu/datalab/sparql?query=<query>` with `Accept: application/sparql-results+json`:
+
+```sparql
+PREFIX eurio:<http://data.europa.eu/s66#>
+SELECT ?id ?acr ?title ?start ?end WHERE {
+  ?org eurio:vatNumber ?vat . FILTER(STRENDS(?vat, "<SIREN>"))
+  ?role eurio:isRoleOf ?org . ?p eurio:hasInvolvedParty ?role ;
+     eurio:identifier ?id ; eurio:startDate ?start .
+  OPTIONAL { ?p eurio:hasAcronym/eurio:shortForm ?acr }
+  OPTIONAL { ?p eurio:title ?title } OPTIONAL { ?p eurio:endDate ?end }
+  FILTER(?start <= "<AS_OF>"^^xsd:date)
+} ORDER BY DESC(?start) LIMIT 20
+```
+
+**As-of filter:** `?start <= <AS_OF>` in the query.
+
+**Reference link:** `https://cordis.europa.eu/project/id/<id>`
+
+**Caveats:**
+- The French VAT number ends with the SIREN. Some organisations have no VAT number in CORDIS: then log `empty` and say so.
+- A project gives R&D themes and partners. It is a Fact about the participation, an Interpretation about a buying need.
+
+## `ratios-inpi`
+
+**What it gives:** filed annual accounts by fiscal year: revenue (`chiffre_d_affaires`), net result (`resultat_net`). Often more years than `recherche-entreprises` `finances`.
+
+**Query:** `https://data.economie.gouv.fr/api/explore/v2.1/catalog/datasets/ratios_inpi_bce/records?where=siren="<SIREN>" and date_cloture_exercice < date'<AS_OF>'&order_by=date_cloture_exercice desc&limit=5`
+
+**As-of filter:** `date_cloture_exercice < date'<AS_OF>'` in the query. Accounts are filed months after the closing date: apply the BODACC "Dépôts des comptes" check of `recherche-entreprises`.
+
+**Reference link:** `https://annuaire-entreprises.data.gouv.fr/donnees-financieres/<SIREN>`
+
+**Caveats:**
+- Companies can file confidential accounts. Then the dataset is empty: log `empty`, not "no revenue".
+- `marge_nette` is often null. Compute `Marge nette %` from `resultat_net / chiffre_d_affaires` when both exist.
+- Growth over 2 years or more is a signal (type accounts).
+
+## `ademe`
+
+**What it gives:** ADEME financial aid granted to the company (energy, climate, industry, mobility, buildings, circular economy): project subject, amount, aid scheme, agreement date.
+
+**Query:** `https://data.ademe.fr/data-fair/api/v1/datasets/les-aides-financieres-de-l'ademe/lines?qs=idBeneficiaire:<SIREN>* AND dateConvention:<=<AS_OF>&sort=-dateConvention&size=20&select=dateConvention,objet,montant,dispositifAide,referenceDecision,nomBeneficiaire`
+
+**As-of filter:** `dateConvention:<=<AS_OF>` in the query.
+
+**Reference link:** `https://data.ademe.fr/datasets/les-aides-financieres-de-l'ademe` and the `referenceDecision`.
+
+**Caveats:**
+- The dataset covers about the last three years of agreements.
+- An aid is a Fact about a funded project. It is not proof of revenue or of a buying need, and the project can be finished on the as-of date.
 
 ## `crm`
 

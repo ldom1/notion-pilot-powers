@@ -9,9 +9,9 @@
       "expectations": [
         "Identity is confirmed from the SIREN",
         "The company is reported active on 2020-06-30",
-        "No timeline event is dated after 2020-06-30",
+        "No signal is dated after 2020-06-30",
         "Every Fact row has a reference link",
-        "The retrieval log lists recherche-entreprises, bodacc, boamp, rss, web-search and crm when a CRM company is in scope",
+        "The retrieval log lists recherche-entreprises, bodacc, boamp, decp, ted, cordis, ademe, ratios-inpi, rss, web-search and crm when a CRM company is in scope",
         "Managers, if listed, have no birth date"
       ]
     },
@@ -23,7 +23,7 @@
       "expectations": [
         "The closure date 2021-01-16 is stated",
         "The verdict is Do not pursue",
-        "The BODACC radiation notice is in the timeline with its link"
+        "The BODACC radiation notice is in the signals with its link"
       ]
     },
     {
@@ -79,9 +79,24 @@
       "expectations": [
         "A preview is shown before any Notion write",
         "No Notion write happens without an explicit go",
-        "The brief is appended to the page body under a dated heading",
+        "The previous brief is replaced, not followed by an addendum",
         "No property is overwritten with an older year",
         "A missing property is proposed, not created without validation"
+      ]
+    },
+    {
+      "id": 8,
+      "prompt": "Brief on SIREN 908713043 for the Artelys Crystal HPC ICP, then write it to the Notion Company page.",
+      "expected_output": "Short Notion body: hook first, dated interest signals with links, ICP score table, at most 5 checks; identity in properties.",
+      "files": [],
+      "expectations": [
+        "The Notion body starts with a hook that names concrete recent signals",
+        "Each signal line has a date, a type and a source link",
+        "The qualification table has the columns ICP criterion, Score, Comment",
+        "The qualification heading links the ICP page",
+        "The body has no Identity, Timeline, Claims, Retrieval log or Conflicts section",
+        "The body has at most 25 top-level blocks",
+        "NAF, head office, manager and registry link are proposed as properties, not written in the body"
       ]
     }
   ]

@@ -3,9 +3,11 @@ name: company-enrichment
 description: >-
   Enrich Notion CRM Companies with French open company data (SIREN, NAF→sector,
   size, revenue), or build a dated, source-backed lead brief on a French company
-  (situation as of a date, BODACC/BOAMP events, press, lead qualification). Use
+  (interest signals from BODACC, BOAMP, DECP, TED, CORDIS, ADEME and press; ICP
+  qualification; a hook for outreach). Use
   when filling firmographics, qualifying a lead, or preparing outreach ("brief on",
-  "avant de contacter", "situation au"). Prefer lookup_siren / local MCP; follow
+  "avant de contacter", "situation au"). Short output: hook, signals,
+  ICP score; identity goes to properties. Prefer lookup_siren / local MCP; follow
   crm-ops write discipline (preview + go). Never invent SIREN or LinkedIn.
 ---
 
@@ -16,7 +18,7 @@ Generic successor of Artelys-only open-data enrichment. **No Infisical, no Prosp
 Two modes:
 
 - **Fill firmographics** — write SIREN, sector, size and revenue on a Company.
-- **Lead brief** — build a dated, source-backed brief and qualify the lead.
+- **Lead brief** — find the interest signals, qualify the lead against the ICP, and write a hook for outreach.
 
 ## Prerequisites
 
@@ -42,11 +44,14 @@ Sources: `references/sources.md`. Output: `references/brief.md`.
 4. Get the ICP. Look in this order: the user message, then the ICP that the workspace overlay skill points to (a page or a database). If you find none, use the default criteria in `references/brief.md` and say so.
 5. If the brief is for a Notion Company (or the user names a CRM company), query the **`crm`** source in `references/sources.md` **before** you mark any buying need, compute need, or outreach signal as Unknown. Read linked Leads, Activities and Meetings.
 6. Query each other source in `references/sources.md`. Apply its as-of filter. Log every attempt in the retrieval log.
-7. Record each material claim with its label (Fact, Interpretation, Unknown), source, event date, retrieval date and reference link.
-8. List conflicts, stale data and failed retrievals. Then qualify the lead with explicit evidence. CRM claims override an open-data "Unknown" on the same topic.
-9. Write the brief in the user's language, with the template in `references/brief.md`. Offer the Notion write.
+7. Record each interest signal with its label (Fact, Interpretation, Unknown), event date, public date and reference link.
+8. List conflicts, stale data and failed retrievals. Then score each ICP criterion with evidence. CRM claims override an open-data "Unknown" on the same topic.
+9. Write the hook from the strongest signals and the ICP pain.
+10. Write the brief in the user's language, with the template in `references/brief.md`. Offer the Notion write.
 
 ## Rules
+
+- **Be brief.** The reader is a sales rep. Put the hook and the signals first. Identity goes to properties, evidence stays in the chat. Follow "Concision" in `references/brief.md`.
 
 - Write no Fact without a reference link.
 - Never present data published after the as-of date as known on that date.

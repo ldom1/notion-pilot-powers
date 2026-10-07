@@ -42,7 +42,18 @@ def test_skill_references_exist(path: Path) -> None:
 
 def test_every_source_has_required_fields() -> None:
     sources = {k: v for k, v in _sections(SOURCES).items() if k.startswith("`")}
-    expected = {"`recherche-entreprises`", "`bodacc`", "`boamp`", "`rss`", "`web-search`"}
+    expected = {
+        "`recherche-entreprises`",
+        "`bodacc`",
+        "`boamp`",
+        "`decp`",
+        "`ted`",
+        "`cordis`",
+        "`ademe`",
+        "`ratios-inpi`",
+        "`rss`",
+        "`web-search`",
+    }
     assert expected <= set(sources)
     for name, body in sources.items():
         for field in SOURCE_FIELDS:
@@ -97,16 +108,18 @@ def test_rss_feeds_are_unique_https() -> None:
 def test_brief_template_has_evidence_sections() -> None:
     text = (ENRICH / "references" / "brief.md").read_text(encoding="utf-8")
     for heading in (
+        "Concision",
         "Identity",
-        "Timeline",
-        "Claims",
+        "Signals",
         "Retrieval log",
         "Conflicts and stale data",
         "Lead qualification",
+        "Hook",
+        "Notion page",
         "Notion write",
     ):
         assert f"## {heading}" in text
-    assert "| Claim | Label | Source | Event date | Retrieved | Reference |" in text
+    assert "| Event date | Public on | Type | Signal | Label | Reference |" in text
     assert "birth date" in text
     for label in (
         "Fact",
@@ -120,6 +133,16 @@ def test_brief_template_has_evidence_sections() -> None:
     assert "## `crm`" in SOURCES.read_text(encoding="utf-8")
     skill = (ENRICH / "SKILL.md").read_text(encoding="utf-8")
     assert "query the **`crm`** source" in skill and "**before** you mark" in skill
+
+
+def test_notion_body_stays_short() -> None:
+    sections = _sections(ENRICH / "references" / "brief.md")
+    assert "at most 25 top-level blocks" in sections["Concision"]
+    assert "Never append an addendum" in sections["Concision"]
+    text = (ENRICH / "references" / "brief.md").read_text(encoding="utf-8")
+    page = text.split("## Notion page", 1)[1].split("## Notion write", 1)[0]
+    assert page.index("Hook") < page.index("Interest signals") < page.index("Qualification")
+    assert "| ICP criterion | Score | Comment |" in page
 
 
 def test_evals_are_well_formed() -> None:

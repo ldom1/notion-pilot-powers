@@ -50,6 +50,23 @@ Source: `company-enrichment` skill, RNE `finances` data (`recherche-entreprises.
 
 **Grouping:** Notion's API can't create the "Finance" section grouping itself (UI/layout-only feature) — group these 4 properties manually in the page layout builder once, after they're first created.
 
+## Registry and brief (Registre section)
+
+Source: `company-enrichment` lead brief. Identity lives here, not in the page body.
+
+| Field | Notion property | Notes |
+|-------|-----------------|-------|
+| NAF | `NAF` | Text; "<code> — <label>" |
+| Forme juridique | `Forme juridique` | Text; for example SAS |
+| Siège | `Siège` | Text; "<postcode> <city>" |
+| Date de création | `Date de création` | Date |
+| Dirigeant | `Dirigeant` | Text; "<name> — <role>", never a birth date |
+| Fiche registre | `Fiche registre` | URL; annuaire-entreprises page |
+| Verdict ICP | `Verdict ICP` | Select: Pursue, Pursue after checks, Hold, Do not pursue |
+| Dernier brief | `Dernier brief` | Date; as-of date of the latest brief |
+
+Group these properties in a "Registre" section in the page layout builder, as for Finance.
+
 ## Incomplete company
 
 Related Lead/People/Activity may still write after user go. Leave missing company fields empty; list them under `needs_review`. Never invent SIREN or LinkedIn.
