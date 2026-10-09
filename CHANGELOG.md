@@ -2,6 +2,11 @@
 
 ## [Unreleased]
 
+### Fixed
+- `crm-ops` no longer points to a missing `references/` folder: it reads the live database schema before a write and uses existing select options only.
+- `crm-ops` uses the local MCP Notion tools only when `notion_token` is set. Without it, it uses Notion's hosted connector; `lookup_siren` still works. A local server that fails to start (no `uv`) is ignored.
+- `plugin.json`, `pyproject.toml` and `__version__` match the released tag (0.4.0).
+
 ## [0.4.0] - 2026-10-07
 
 ### Changed

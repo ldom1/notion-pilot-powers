@@ -16,7 +16,7 @@ Generic CRM operations for a Notion Pilot-deployed workspace. **No workspace nam
 1. **Notion hosted MCP** authenticated (default path). If missing → stop and ask the user to connect it.
 2. Optional **local `notion-pilot-powers` MCP** for dry-run upserts, dedup, `lookup_siren`.
 
-Read entity references under `references/` for the entities you touch.
+Before a write, read the live schema of each database you touch (property names, types, select options). Write only existing select options; if a value has no option, show it and ask.
 
 ## Hard rules
 
@@ -29,8 +29,9 @@ Read entity references under `references/` for the entities you touch.
 
 | Prefer | Fallback |
 |--------|----------|
-| Local MCP tools (`upsert_*` dry-run → confirm, `search_*`, `log_activity`, …) | Notion hosted MCP search/fetch/create/update |
-| If local MCP failed to start | Hosted MCP only (skills still load — P0 fork A) |
+| Local MCP tools (`upsert_*` dry-run → confirm, `search_*`, `log_activity`, …) **only when the plugin's `notion_token` is set** | Notion hosted MCP search/fetch/create/update |
+| No `notion_token`, or a local tool returns a `NOTION_TOKEN` error | Hosted MCP only. `lookup_siren` still works: it needs no token |
+| Local MCP failed to start (for example `uv` not installed) | Hosted MCP only. Skills still load |
 
 Never call the Notion API directly from this skill.
 
