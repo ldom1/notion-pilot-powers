@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+## [0.5.0] - 2026-10-13
+
 ### Added
 - `company-enrichment` finds the ICP in a database titled « ICP profiles » when the user message and the overlay give none. The Notion Pilot wizard deploys it. The brief uses the `Active` profile whose Product and Sectors fit, and asks when more than one fits.
 
