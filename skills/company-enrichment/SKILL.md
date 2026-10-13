@@ -41,7 +41,7 @@ Sources: `references/sources.md`. Output: `references/brief.md`.
 1. Get the as-of date. If the user gives none, use today. Reject a future date.
 2. Confirm the identity. Use the SIREN first: from the user, the Notion page, `lookup_siren`, or recherche-entreprises. If a name matches more than one company, apply the stop rule in `references/brief.md`.
 3. Check that the company existed on the as-of date. If it did not, say so and stop. If it was closed on that date, query recherche-entreprises and BODACC only. Give the closure evidence and the verdict "Do not pursue". Log the other sources "not applicable: company closed".
-4. Get the ICP. Look in this order: the user message, then the ICP that the workspace overlay skill points to (a page or a database). If you find none, use the default criteria in `references/brief.md` and say so.
+4. Get the ICP. Look in this order: the user message, then the ICP that the workspace overlay skill points to (a page or a database), then a database titled « ICP profiles » (the wizard deploys it in the ICP page of the CRM). In that database, use the profile with Status `Active` whose Product and Sectors fit the prospect. If more than one fits, or none, ask the user. If you find no ICP, use the default criteria in `references/brief.md` and say so.
 5. If the brief is for a Notion Company (or the user names a CRM company), query the **`crm`** source in `references/sources.md` **before** you mark any buying need, compute need, or outreach signal as Unknown. Read linked Leads, Activities and Meetings.
 6. Query each other source in `references/sources.md`. Apply its as-of filter. Log every attempt in the retrieval log.
 7. Record each interest signal with its label (Fact, Interpretation, Unknown), event date, public date and reference link.
@@ -51,7 +51,7 @@ Sources: `references/sources.md`. Output: `references/brief.md`.
 
 ## Rules
 
-- **Be brief.** The reader is a sales rep. Put the hook and the signals first. Identity goes to properties, evidence stays in the chat. Follow "Concision" in `references/brief.md`.
+- **Be brief.** The reader is a sales rep. Put the verdict, the hook and the signals first. Identity goes to properties, evidence stays in the chat. Follow "Concision" in `references/brief.md`.
 
 - Write no Fact without a reference link.
 - Never present data published after the as-of date as known on that date.

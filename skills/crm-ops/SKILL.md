@@ -9,7 +9,7 @@ description: >-
 
 # crm-ops
 
-Generic CRM operations for a Notion Pilot-deployed workspace. **No workspace names or hard-coded IDs** — resolve DBs via Notion MCP search (titles: Leads / 💶 Leads, Activities / ⚡ Activities, People, Companies, Meetings) or via local MCP `userConfig`.
+Generic CRM operations for a Notion Pilot-deployed workspace. **No workspace names or hard-coded IDs** — resolve DBs via Notion MCP search (titles: Leads / 💶 Leads, Activities / ⚡ Activities, People, Companies, Meetings, ICP profiles) or via local MCP `userConfig`.
 
 ## Prerequisites
 
@@ -21,6 +21,9 @@ Before a write, read the live schema of each database you touch (property names,
 ## Hard rules
 
 - **Always preview** — validation table before any create/update. Write only after explicit go (`ok`, `go`, …).
+- **An open question blocks the write.** If the preview asks a question, write nothing until the user answers it. A go sent while a question is open does not cover it: ask the question again, then show the updated preview.
+- **One decision per question.** Never bundle go with another choice (a stage, a sector, an ICP). When several choices are open, number them so each gets its own answer.
+- **No tool noise in the chat.** While you query sources, print one status line per source (`BODACC — 3 notices`, `TED — empty`, `DECP — failed: 403`). Never paste raw JSON, scripts or API responses.
 - **Never invent** LinkedIn, SIREN, email, titles, or financials.
 - **Language:** follow the user; default EN.
 - Prefer one multi-entity plan when the user pastes a thread.

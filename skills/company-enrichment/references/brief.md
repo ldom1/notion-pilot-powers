@@ -11,7 +11,7 @@ The brief has two outputs:
 
 The reader is a sales rep who prepares a call or an email. Every line must help that.
 
-- Lead with the hook and the interest signals. They are the reason to call now.
+- Lead with the verdict, then the hook and the interest signals. They are the reason to call now. In the chat preview too, put the verdict and the hook before the working notes.
 - One line per bullet. One fact per line. No process notes, no "lessons", no restated rules.
 - Never repeat in the body a value that is in a property (SIREN, NAF, head office, manager, size, revenue).
 - Notion body: at most 25 top-level blocks. Working notes: tables, no prose paragraphs.
@@ -107,11 +107,11 @@ The body, in the user's language. Example headings in English:
 
 ```
 ## Brief — <AS_OF>
+**Verdict:** <verdict>
 > 💡 Hook: <hook>                                   (callout)
 ### Interest signals
 - <YYYY-MM-DD> · <type> · <signal, max 15 words> — [source](<link>)   (max 8, newest first)
 ### Qualification — ICP <link to the ICP page>      (page mention when the ICP is a Notion page)
-**Verdict:** <verdict>
 | ICP criterion | Score | Comment |
 ### Check before contact
 1. <check>                                          (max 5)

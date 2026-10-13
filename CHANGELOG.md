@@ -2,7 +2,16 @@
 
 ## [Unreleased]
 
+### Added
+- `company-enrichment` finds the ICP in a database titled « ICP profiles » when the user message and the overlay give none. The Notion Pilot wizard deploys it. The brief uses the `Active` profile whose Product and Sectors fit, and asks when more than one fits.
+
+### Changed
+- Lead brief: the verdict comes first, before the hook, in the Notion body and in the chat preview.
+
 ### Fixed
+- `crm-ops` writes nothing while a question in the preview is open. A go sent before the answer does not cover that question.
+- `crm-ops` asks one decision per question, and never bundles go with another choice.
+- `crm-ops` prints one status line per queried source, without raw JSON or scripts in the chat.
 - `crm-ops` no longer points to a missing `references/` folder: it reads the live database schema before a write and uses existing select options only.
 - `crm-ops` uses the local MCP Notion tools only when `notion_token` is set. Without it, it uses Notion's hosted connector; `lookup_siren` still works. A local server that fails to start (no `uv`) is ignored.
 - `plugin.json`, `pyproject.toml` and `__version__` match the released tag (0.4.0).
