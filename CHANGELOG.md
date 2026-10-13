@@ -2,6 +2,13 @@
 
 ## [Unreleased]
 
+## [0.5.1] - 2026-10-13
+
+### Fixed
+- Marketplace plugin `source` is now `./`. claude.ai documents relative plugin paths only in this form; `.` gave "Marketplace sync failed" in the Claude app. Claude Code accepts both.
+- `company-enrichment` in the Claude app: when the code sandbox has no network, it uses web search or web fetch on annuaire-entreprises and logs the blocked sources.
+- Lead brief chat output is Markdown only: no raw `<details>` tags in the Claude app.
+
 ## [0.5.0] - 2026-10-13
 
 ### Added

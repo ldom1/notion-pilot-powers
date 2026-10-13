@@ -15,6 +15,7 @@ The reader is a sales rep who prepares a call or an email. Every line must help 
 - One line per bullet. One fact per line. No process notes, no "lessons", no restated rules.
 - Never repeat in the body a value that is in a property (SIREN, NAF, head office, manager, size, revenue).
 - Notion body: at most 25 top-level blocks. Working notes: tables, no prose paragraphs.
+- Chat output is Markdown only. No HTML tags such as `<details>` or `<summary>`: the Claude app shows them as raw text.
 - Drop routine notices that carry no sales meaning (for example BODACC "Modifications diverses" with no change of capital, manager, head office or activity).
 - A new brief replaces the previous one. Never append an addendum.
 

@@ -25,6 +25,7 @@ Two modes:
 1. Follow **`crm-ops`** write discipline (preview table, explicit go).
 2. Prefer local MCP `lookup_siren` / `upsert_companies` dry-run when available.
 3. Without the local MCP, use Notion hosted MCP, and query `recherche-entreprises.api.gouv.fr` directly (see `references/sources.md`).
+4. If the code sandbox has no network (Claude app), use web search or web fetch on `annuaire-entreprises.data.gouv.fr/entreprise/<SIREN>`. Log the blocked sources as "not available" in the retrieval log.
 
 ## Fill firmographics
 
