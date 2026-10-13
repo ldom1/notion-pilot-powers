@@ -78,6 +78,9 @@ async def get_open_leads(settings: Settings) -> list[dict[str, Any]]:
                     "title": _title(page),
                     "stage": stage,
                     "next_action": next_action,
+                    "next_step_date": (props.get("Next Step Date", {}).get("date") or {}).get(
+                        "start", ""
+                    ),
                     "url": url,
                 }
             )

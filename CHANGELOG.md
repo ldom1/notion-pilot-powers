@@ -2,6 +2,16 @@
 
 ## [Unreleased]
 
+## [0.6.0] - 2026-10-13
+
+### Added
+- `crm-ops` asks for the reason before it writes `Closed Lost`, and writes it to the Leads `Lost Reason` property (Notion Pilot ≥ 1.3.0; else `Notes`).
+- `crm-ops` logs a to-do as an Activity with Type `✅ Task`, a due date in `Next Step Date` and a `Done` checkbox, and checks `Done` when the task is finished.
+- `get_open_leads` returns `next_step_date`.
+
+### Changed
+- `crm-ops` leads reference: no product names from one workspace; `Product` uses the live options.
+
 ## [0.5.1] - 2026-10-13
 
 ### Fixed

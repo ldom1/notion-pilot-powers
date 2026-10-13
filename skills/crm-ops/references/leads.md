@@ -4,7 +4,7 @@ Notion DB title: **💶 Leads**. Parent data source: see `crm-ids.md`. Model: `D
 
 ## Naming
 
-Prefer `{Company} / <product>` for Crystal HPC deals when that product applies (e.g. `Hexana / ACHPC`, `CRE / ACHPC`). Keep existing title on UPDATE (match is by exact title for `upsert_deal`).
+Prefer `{Company} / <product>` when one product applies. Keep the existing title on UPDATE (match is by exact title for `upsert_deal`).
 
 ## Stage enum
 
@@ -16,7 +16,11 @@ Prefer `{Company} / <product>` for Crystal HPC deals when that product applies (
 
 ## Product
 
-Usually `Artelys Crystal HPC` and/or `Service en Optimization`.
+Use the live `Product` options only. If none fits, ask.
+
+## Closing a deal
+
+Before you write `Closed Lost`, ask for the reason and put it in `Lost Reason` (live options only: `Price` | `Competitor` | `Timing` | `No budget` | `No response` | `Not a fit` | `Other`). Ask in its own question, not bundled with go. If the database has no `Lost Reason`, write the reason in `Notes`.
 
 ## Key properties to set on UPDATE
 

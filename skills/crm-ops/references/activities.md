@@ -4,7 +4,7 @@ Append-only event log. Model: `ActivityInput`. Never “upsert” an activity �
 
 ## Type enum
 
-`📞 Call` | `📧 Email` | `💼 LinkedIn` | `🎤 Demo` | `🤝 Meeting` | `📄 Proposal` | `🎪 Conference` | `📋 Other`
+`📞 Call` | `📧 Email` | `💼 LinkedIn` | `🎤 Demo` | `🤝 Meeting` | `📄 Proposal` | `🎪 Conference` | `✅ Task` | `📋 Other`
 
 ## Outcome enum
 
@@ -25,7 +25,12 @@ Append-only event log. Model: `ActivityInput`. Never “upsert” an activity �
 | next_step | `Next Step` | FR |
 | next_step_date | `Next Step Date` | |
 | notes | `Notes` | source language OK |
+| done | `Done` | checkbox; tasks only |
 
 ## From email threads
 
 Create one activity per meaningful event (send, reply, meeting). Link Deal + Person + Company when known. Planned future meetings: still CREATE with the planned date and Outcome `➡️ Follow-up Needed`.
+
+## Tasks
+
+A to-do ("send the proposal by Friday") is an Activity with Type `✅ Task`, `Next Step Date` = due date, `Done` unchecked, linked to the Deal. When the user says it is done, UPDATE that row: check `Done`. This is the one activity you update. If the database has no `✅ Task` option or no `Done`, set the Lead `Next Step` and date instead.
