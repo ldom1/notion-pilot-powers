@@ -86,7 +86,7 @@
     },
     {
       "id": 8,
-      "prompt": "Brief on SIREN 908713043 for the Artelys Crystal HPC ICP, then write it to the Notion Company page.",
+      "prompt": "Brief on SIREN 908713043 for my active ICP profile, then write it to the Notion Company page.",
       "expected_output": "Short Notion body: hook first, dated interest signals with links, ICP score table, at most 5 checks; identity in properties.",
       "files": [],
       "expectations": [

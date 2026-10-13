@@ -11,7 +11,7 @@ description: >-
 
 # person-enrichment
 
-Generic counterpart of `company-enrichment` for humans. **Public data only.** No Infisical, no paid people DB, no scraping behind login.
+Generic counterpart of `company-enrichment` for humans. **Public data only.** No paid people database, no scraping behind login.
 
 Two modes:
 

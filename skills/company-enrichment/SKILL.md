@@ -13,7 +13,7 @@ description: >-
 
 # company-enrichment
 
-Generic successor of Artelys-only open-data enrichment. **No Infisical, no Prosper requirement** for the customer path.
+French open-data enrichment for any Notion Pilot CRM. Public sources only; no paid data provider.
 
 Two modes:
 
@@ -31,7 +31,7 @@ Two modes:
 
 **In scope:** SIREN, sector (from NAF), size, country, website, LinkedIn when evidenced. Revenue with its fiscal year, headcount band with its year. Property names: `references/brief.md`, section "Notion write".
 
-**Out of scope:** schema changes without explicit validation, inventing URLs/financials. Person create/enrich → `person-enrichment`. Prosper / OpenRouter (Louis-only `--with-external` path — not this skill).
+**Out of scope:** schema changes without explicit validation, inventing URLs/financials. Person create/enrich → `person-enrichment`.
 
 **Confidence:** only write SIREN on high confidence (user-supplied 9 digits, or registry name match ≥ 85 with corroboration). Otherwise `needs_review` and leave empty.
 
