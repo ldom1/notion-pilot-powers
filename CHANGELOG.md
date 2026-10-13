@@ -2,6 +2,9 @@
 
 ## [Unreleased]
 
+### Added
+- Each GitHub Release has one zip per skill (`crm-ops.zip`, `company-enrichment.zip`, `person-enrichment.zip`) for **Customize → Skills → Upload skill** in the Claude app.
+
 ## [0.6.1] - 2026-10-13
 
 ### Fixed
