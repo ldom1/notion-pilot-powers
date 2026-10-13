@@ -2,7 +2,7 @@
 
 ## [Unreleased]
 
-## [0.5.2] - 2026-10-13
+## [0.6.0] - 2026-10-13
 
 ### Added
 - `crm-ops` asks for the reason before it writes `Closed Lost`, and writes it to the Leads `Lost Reason` property (Notion Pilot ≥ 1.3.0; else `Notes`).
