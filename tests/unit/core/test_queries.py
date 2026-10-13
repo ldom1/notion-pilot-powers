@@ -33,6 +33,7 @@ async def test_get_open_leads_returns_list():
                         "Name": {"type": "title", "title": [{"plain_text": "Artelys HPC"}]},
                         "Stage": {"select": {"name": "Prospect"}},
                         "Next Step": {"rich_text": [{"plain_text": "Call CEO"}]},
+                        "Next Step Date": {"date": {"start": "2026-10-20"}},
                     },
                 }
             ]
@@ -44,6 +45,7 @@ async def test_get_open_leads_returns_list():
     assert result[0]["title"] == "Artelys HPC"
     assert result[0]["stage"] == "Prospect"
     assert result[0]["next_action"] == "Call CEO"
+    assert result[0]["next_step_date"] == "2026-10-20"
 
 
 @pytest.mark.asyncio
