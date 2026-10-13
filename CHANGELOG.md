@@ -2,6 +2,11 @@
 
 ## [Unreleased]
 
+## [0.6.1] - 2026-10-13
+
+### Fixed
+- Skill descriptions and evals no longer name one workspace's company, products or secret manager. The Claude app shows `SKILL.md` to every user who installs it.
+
 ## [0.6.0] - 2026-10-13
 
 ### Added
