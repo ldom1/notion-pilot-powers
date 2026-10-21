@@ -2,6 +2,9 @@
 
 ## [Unreleased]
 
+### Added
+- One logo per skill in `assets/logos/` (SVG, and 512 × 512 PNG for marketplace listings), shown in the README.
+
 ## [0.8.1] - 2026-10-21
 
 ### Changed
