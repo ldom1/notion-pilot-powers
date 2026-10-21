@@ -68,6 +68,8 @@ Score each person 0–2 per row. Highest total = primary. Tie-break: technical o
 | Authority | Can sponsor a pilot or intro | Influences | No leverage |
 | Warmth | Prior CRM Activity / warm intro | Cold but public bio | Unknown |
 
+**New in role.** A person appointed to a buying role (managing director, CIO, CFO, HR director, purchasing director) less than 100 days ago is the strongest timing contact: new decision-makers review their suppliers in their first months. Rank this person first when the other rows tie or differ by 1 point. The appointment date needs a source: a BODACC manager change, a press nomination, or a dated company page. Press is an Interpretation. A non-officer role (CIO, CFO, HR, purchasing) appears in no registry: press or the company site is the only source.
+
 Output:
 
 - **Primary** — name, why (cite claims).

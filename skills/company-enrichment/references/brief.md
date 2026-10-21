@@ -34,14 +34,17 @@ Header line: `<legal name> — SIREN <SIREN> — as of <AS_OF> — identity: con
 
 ## Signals
 
-An interest signal is a dated event that gives a reason to contact the company now, or that changes its needs or its budget. Events on or before the as-of date, newest first.
+An interest signal is a dated event that gives a reason to contact the company now, or that changes its needs or its budget. Events on or before the as-of date. Build the table with `references/signals.md`: corrections first, then cross-source dedup, procedure state, composites, strength. Sort by priority score, highest first.
 
-| Event date | Public on | Type | Signal | Label | Reference |
-|---|---|---|---|---|---|
+| Event date | Public on | Type | Signal | Strength | Label | Reference |
+|---|---|---|---|---|---|---|
 
 - **Event date** is the date of the event or the fiscal year. **Public on** is the publication, filing or release date. Keep a signal only when **Public on** is on or before the as-of date.
+- **Strength** is 0–5 from `references/signals.md`. Add "(hook)" to the one signal that carries the hook, and "(context)" to signals outside their hook window.
+- One event, one row: an event seen in several sources gets one row with every reference link.
+- A composite signal is one row. Name its parts in the Signal cell.
 
-Types: press, funding, partnership, public contract (`boamp`, `decp`, `ted`), EU project (`cordis`), public aid (`ademe`), manager change, capital or transfer (`bodacc`), hiring, procedure, accounts (`ratios-inpi`), CRM.
+Types: press, funding, partnership, public contract (`boamp`, `decp`, `ted`), contract renewal, EU project (`cordis`), public aid (`ademe`), manager change, capital or transfer (`bodacc`), takeover, procedure, accounts (`ratios-inpi`), composite, CRM.
 
 Labels:
 
@@ -83,21 +86,29 @@ Status values:
 
 - **Verdict:** Pursue, Pursue after checks, Hold, or Do not pursue.
 - **Criteria:** the ICP used, and where it comes from (user, workspace overlay, or default criteria). Link the ICP page when there is one.
-- **Default criteria:** company active; sector fit; size fit; no open collective procedure; recent growth, hiring or contract signals.
+- **Default criteria:** company active; no active difficulty state (see "Collective procedure states" in `references/signals.md`); a signal inside its hook window. Sector and size fit need an ICP: without one, write "n/a — no ICP" for them, not ❔.
 - **Score** each criterion: ✅ fit, 🟡 partial, ❌ no fit, ❔ unknown. The comment gives the evidence in one line.
 - Size fit: assess the legal entity. If it belongs to a group (`categorie_entreprise` ETI or GE with a small headcount), also assess the group, as an Interpretation.
 - Score a criterion ❔ when no ICP or no data allows it. With a ❔ criterion, the best verdict is "Pursue after checks".
 - Do not score compute / buying pain ❔ if a CRM Lead or Activity already states it. Prefer **Fact (CRM)** over open-data silence.
-- **Check before contact:** at most 5 checks the user must do first. Put the weakest evidence here. If the NAF is 70.10Z (head office or holding), say that the buyer can be a subsidiary.
+- **Check before contact:** at most 5 checks the user must do first. Put the weakest evidence here. If the NAF is a head office or holding code (70.10Z, 64.20Z, 64.21Y, 64.22Y), say that the buyer can be a subsidiary.
 - **Closed company:** if a BODACC "Ventes et cessions" notice names a buyer or an absorbing company (`acte.descriptif`), give it as the possible successor. Label it Fact, with the notice link.
 
-A closed company, or one in liquidation on the as-of date, gets "Do not pursue". A company in sauvegarde or redressement gets "Hold" unless the ICP says otherwise.
+Use the procedure state on the as-of date, from "Collective procedure states" in `references/signals.md`:
+
+- Closed company, liquidation, sale plan (for the seller) or negative closure: "Do not pursue".
+- Conciliation, sauvegarde, redressement, or a plan still running: "Hold", unless the ICP targets companies in difficulty or the composite "Exit from crisis" applies.
+- Positive exit: the procedure no longer blocks the verdict. Say so in one line.
+- Composite "Silent pre-distress": "Hold" or "Pursue after checks", with each marker in "Check before contact".
 
 ## Hook
 
 One to three sentences, ready to paste in an email. Write it after the qualification.
 
-- Name the 2 or 3 strongest recent signals in concrete words (a project, a partner, a funding round).
+- Under a veto (closed, liquidation, active difficulty state), write "No hook: <state> since <date>" and the next date to check. Nothing else.
+- Build it on the signal with the highest priority score ("Priority" in `references/signals.md`). Add one or two more signals as context. Never use a signal outside its hook window.
+- Name the signals in concrete words (a contract and its end month, a partner, a funding round).
+- Never state an inference about a person (age, health, plans). Never congratulate a new manager when the composite says "Departure without replacement".
 - Connect them to the ICP pain that the product solves.
 - If the CRM has a past exchange, refer to it (date, topic, contact).
 - Use only signals from the Signals table. No new claim.
@@ -111,7 +122,7 @@ The body, in the user's language. Example headings in English:
 **Verdict:** <verdict>
 > 💡 Hook: <hook>                                   (callout)
 ### Interest signals
-- <YYYY-MM-DD> · <type> · <signal, max 15 words> — [source](<link>)   (max 8, newest first)
+- <YYYY-MM-DD> · <type> · <signal, max 15 words> — [source](<link>)   (max 8, highest priority first)
 ### Qualification — ICP <link to the ICP page>      (page mention when the ICP is a Notion page)
 | ICP criterion | Score | Comment |
 ### Check before contact

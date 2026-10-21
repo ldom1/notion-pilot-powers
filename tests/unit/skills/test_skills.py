@@ -66,6 +66,46 @@ def test_dated_queries_filter_on_as_of() -> None:
         assert "dateparution <= date'<AS_OF>'" in sources[name] and "<SIREN>" in sources[name]
 
 
+def test_queries_select_the_fields_signals_need() -> None:
+    sources = _sections(SOURCES)
+    for field in (
+        "typeavis_lib",
+        "parutionavisprecedent",
+        "listepersonnes",
+        "modificationsgenerales",
+    ):
+        assert field in sources["`bodacc`"], field
+    for field in ("dureemois", "titulairesmodification", "actessoustraitance"):
+        assert field in sources["`decp`"], field
+    assert 'search(titulaire,"<name>")' in sources["`boamp`"]
+
+
+SIGNALS = ENRICH / "references" / "signals.md"
+
+
+def test_signals_reference_is_complete() -> None:
+    sections = _sections(SIGNALS)
+    for heading in (
+        "Strength and hook window",
+        "Priority",
+        "Cross-source dedup",
+        "Composite signals",
+        "Collective procedure states",
+        "Corrections and annulments",
+    ):
+        assert heading in sections, heading
+    assert "`references/signals.md`" in (ENRICH / "SKILL.md").read_text(encoding="utf-8")
+    for section in ("Strength and hook window", "Composite signals"):
+        rows = [
+            ln for ln in sections[section].splitlines() if ln.startswith("| ") and "---" not in ln
+        ]
+        body = rows[1:]
+        assert len(body) >= 10, section
+        for row in body:
+            cells = [c.strip() for c in row.strip("|").split("|")]
+            assert any(re.fullmatch(r"[0-5]", c) for c in cells), row
+
+
 def test_headcount_table_matches_lookup_siren() -> None:
     rows = re.findall(
         r"^\| `(\w\w)` \| [^|]+ \| ([^|]*) \|$", SOURCES.read_text(encoding="utf-8"), re.MULTILINE
@@ -119,7 +159,7 @@ def test_brief_template_has_evidence_sections() -> None:
         "Notion write",
     ):
         assert f"## {heading}" in text
-    assert "| Event date | Public on | Type | Signal | Label | Reference |" in text
+    assert "| Event date | Public on | Type | Signal | Strength | Label | Reference |" in text
     assert "birth date" in text
     for label in (
         "Fact",

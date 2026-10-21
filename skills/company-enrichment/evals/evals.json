@@ -98,6 +98,52 @@
         "The body has at most 25 top-level blocks",
         "NAF, head office, manager and registry link are proposed as properties, not written in the body"
       ]
+    },
+    {
+      "id": 9,
+      "prompt": "Brief on SIREN 854067022 as of 2025-07-01.",
+      "expected_output": "Brief that reads the collective procedure as a running plan, with the verdict Hold.",
+      "expectations": [
+        "The procedure state is a running sauvegarde or continuation plan, from the judgment dated 2025-03-21",
+        "The two BODACC notices of the same 2025-03-21 judgment appear as one signal row",
+        "The event date of the procedure signal is the judgment date, not the publication date",
+        "The verdict is Hold, and the hook makes no positive claim"
+      ],
+      "files": []
+    },
+    {
+      "id": 10,
+      "prompt": "Brief on SIREN 814769360 as of 2025-03-01.",
+      "expected_output": "Brief in which the BODACC notice annulled on 2025-01-26 is not used.",
+      "expectations": [
+        "The BODACC notice published on 2023-10-31 and annulled on 2025-01-26 is not reported as a Fact",
+        "The annulment is named in Conflicts and stale data or in the retrieval log",
+        "No signal or hook relies on the annulled notice"
+      ],
+      "files": []
+    },
+    {
+      "id": 11,
+      "prompt": "Brief on SIREN 542107651 as of 2024-11-01, including public contracts.",
+      "expected_output": "Brief that computes contract end dates from DECP and flags the renewals due.",
+      "expectations": [
+        "At least one DECP contract end date is computed as datenotification + dureemois",
+        "A contract notified on 2023-01-17 for 24 months is reported as a contract renewal due around 2025-01-17",
+        "Every signal row has a Strength value from 0 to 5",
+        "Exactly one signal is marked as the hook, and it is inside its hook window"
+      ],
+      "files": []
+    },
+    {
+      "id": 12,
+      "prompt": "Which public contracts did SIREN 542107651 win in 2024? Use BOAMP.",
+      "expected_output": "Wins found by name in BOAMP award notices, labelled Interpretation unless DECP or the postcode confirms them.",
+      "expectations": [
+        "BOAMP is also searched by the company name in titulaire, not only by SIREN",
+        "A notice where the SIREN appears only as the buyer is never counted as a contract won",
+        "A win found only by name is labelled Interpretation, or Fact with the confirming DECP record or postcode"
+      ],
+      "files": []
     }
   ]
 }

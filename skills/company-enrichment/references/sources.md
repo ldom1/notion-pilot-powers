@@ -87,7 +87,7 @@ Log every source in the retrieval log, also when you did not query it. Read ever
 
 **What it gives:** official legal notices: creations, changes, sales and transfers, collective procedures, conciliation, deregistrations, accounts filings.
 
-**Query:** `https://bodacc-datadila.opendatasoft.com/api/explore/v2.1/catalog/datasets/annonces-commerciales/records?where=registre like "<SIREN>" and dateparution <= date'<AS_OF>'&order_by=dateparution desc&limit=20&select=id,dateparution,familleavis_lib,typeavis_lib,tribunal,jugement,acte,url_complete`
+**Query:** `https://bodacc-datadila.opendatasoft.com/api/explore/v2.1/catalog/datasets/annonces-commerciales/records?where=registre like "<SIREN>" and dateparution <= date'<AS_OF>'&order_by=dateparution desc&limit=20&select=id,dateparution,familleavis_lib,typeavis_lib,parutionavisprecedent,tribunal,jugement,acte,listepersonnes,modificationsgenerales,depot,url_complete`
 
 **As-of filter:** `dateparution <= date'<AS_OF>'` in the query. The event date is `dateparution` (publication date).
 
@@ -99,8 +99,14 @@ Log every source in the retrieval log, also when you did not query it. Read ever
 - The judgment date inside `jugement` can be earlier than `dateparution`. Give both when they differ.
 - `familleavis_lib` values: Créations, Immatriculations, Modifications diverses, Ventes et cessions, Procédures collectives, Procédures de conciliation, Procédures de rétablissement professionnel, Radiations, Dépôts des comptes, Annonces diverses.
 - For "Ventes et cessions", read `acte.descriptif`. It names the other party: buyer, or absorbing company in a merger.
+- In a sale, find the company's side. It is the **seller** when it appears as the former owner (`listeprecedentproprietaire`, « ancien propriétaire »). It is the **buyer** when it is the person of the notice (`listepersonnes`).
+- A sale is often published twice (« insertion provisoire », then the regular notice). Same deed date and same parties: one event.
 - A "Procédures collectives" notice is a Fact about the procedure. Read `jugement` for its type (sauvegarde, redressement, liquidation, plan, clôture).
 - `total_count` above 20 means older notices exist. Say so.
+- `typeavis_lib` "Avis rectificatif" or "Avis d'annulation" changes an earlier notice (`parutionavisprecedent`). Apply "Corrections and annulments" in `references/signals.md` before you use any notice.
+- `listepersonnes` holds structured data: `capital.montantCapital` (compare two notices to get a capital change) and `administration` (managers and statutory auditors, as text).
+- `modificationsgenerales.descriptif` says what changed (capital, manager, head office, name, legal form). It also carries "continuation despite losses" (L.225-248 / L.223-42) and "location-gérance".
+- In a creation notice, `acte` can say the business was bought (« fonds acquis par achat »): a takeover seen from the buyer.
 - BODACC covers companies in the trade register. Public bodies and most associations are not in it. For them, log BODACC "not applicable", not "empty".
 
 ## `boamp`
@@ -109,6 +115,10 @@ Log every source in the retrieval log, also when you did not query it. Read ever
 
 **Query:** `https://boamp-datadila.opendatasoft.com/api/explore/v2.1/catalog/datasets/boamp/records?where=search(donnees,"<SIREN>") and dateparution <= date'<AS_OF>'&order_by=dateparution desc&limit=20&select=idweb,dateparution,nature_libelle,objet,nomacheteur,titulaire,url_avis`
 
+**Role in the notice:** the SIREN can be the buyer's or a winner's. In eForms notices (2024 onwards) `titulaire` is empty: read `donnees` to find the role (the winner's SIRET and name sit in the award section).
+
+**Second query (contracts won by name):** run it when the SIREN query finds no notice where the company is a winner. Search the winner by name: same query with `where=search(titulaire,"<name>") and dateparution <= date'<AS_OF>'`. Try the legal name and the brand name. If `total_count` is above 100 (a common word such as « Transitions »), add `and code_departement="<head office department>"`, read the 20 newest, and log the filter. `code_departement` is the **buyer's** department: the filter keeps local buyers only, so say "wins outside the department not searched".
+
 **As-of filter:** `dateparution <= date'<AS_OF>'` in the query.
 
 **Reference link:** `url_avis` of each notice.
@@ -116,19 +126,23 @@ Log every source in the retrieval log, also when you did not query it. Read ever
 **Caveats:**
 - The search is full text. The SIREN can be the buyer, a winner, or an unrelated number.
 - Compare `nomacheteur` and `titulaire` with the legal name. Label the role: buyer, winner, or unclear.
-- Count a notice as a won contract only when the company is in `titulaire` and `nature_libelle` is a result ("Résultat de marché").
+- Count a notice as a won contract only when `nature_libelle` is a result ("Résultat de marché") and the company is a winner, in `titulaire` or in the award section of `donnees`.
+- The award date is in `donnees`. If you did not read it, use `dateparution` as the event date and say so.
+- A name search is full text: it also returns subsidiaries and other names that start the same way. Keep only the legal entity of the brief.
 - When the company is the buyer, report its purchases as a separate signal: it buys these services. Never call them contracts won.
 - A gap in dates can come from the dataset, not from the company. Say so. Do not conclude "no activity".
-- A search by name (`search(titulaire,"<name>")`) is an Interpretation, never a Fact.
+- A win found by name is an Interpretation. It becomes a Fact when the postcode in `donnees` matches the head office, or when a DECP record with the SIRET confirms it (see "Cross-source dedup" in `references/signals.md`).
 - **BOAMP empty ≠ no tender.** Also check `decp` and `ted`. Private RFPs, partner-led bids and co-selling deals do not appear here. Check `crm` before you say there is no procurement activity.
 
 ## `decp`
 
 **What it gives:** public contracts awarded, from the buyers' own data (DECP): subject, buyer, amount, procedure, notification date. It also covers contracts below the BOAMP threshold.
 
-**Query:** `https://data.economie.gouv.fr/api/explore/v2.1/catalog/datasets/decp-v3-marches-valides/records?where=((titulaire_id_1>=<SIREN>00000 and titulaire_id_1<<SIREN+1>00000) or startswith(titulaire_id_2,"<SIREN>") or (titulaire_id_3>=<SIREN>00000 and titulaire_id_3<<SIREN+1>00000)) and datenotification <= date'<AS_OF>'&order_by=datenotification desc&limit=20&select=id,datenotification,objet,montant,acheteur_id,acheteur_nom,nature,procedure`
+**Query:** `https://data.economie.gouv.fr/api/explore/v2.1/catalog/datasets/decp-v3-marches-valides/records?where=((titulaire_id_1>=<SIREN>00000 and titulaire_id_1<<SIREN+1>00000) or startswith(titulaire_id_2,"<SIREN>") or (titulaire_id_3>=<SIREN>00000 and titulaire_id_3<<SIREN+1>00000)) and datenotification <= date'<AS_OF>'&order_by=datenotification desc&limit=20&select=id,datenotification,objet,montant,acheteur_id,acheteur_nom,nature,procedure,codecpv,dureemois,dureemoismodification,montantmodification,titulairesmodification,actessoustraitance`
 
 `<SIREN+1>` is the SIREN plus one, as a number. `titulaire_id_1` and `titulaire_id_3` are numbers, `titulaire_id_2` is text: keep the query as written. For contracts the company buys, run `where=startswith(acheteur_id,"<SIREN>") and datenotification <= date'<AS_OF>'`.
+
+**Renewal query:** the newest 20 contracts miss long contracts signed earlier. To find contracts that end soon, run the holder query again with `and datenotification >= date'<AS_OF minus 4 years>'` and `limit=100`. Compute each end date. If `total_count` is above 100, say that older contracts were not checked.
 
 **As-of filter:** `datenotification <= date'<AS_OF>'` in the query.
 
@@ -138,6 +152,9 @@ Log every source in the retrieval log, also when you did not query it. Read ever
 - `acheteur_nom` is often null. Give `acheteur_id` (SIRET) and resolve the name with `recherche-entreprises` when it matters.
 - Buyers publish late or not at all. Empty does not mean no public contract.
 - When the company is the buyer, report its purchases as a separate signal. Never call them contracts won.
+- **Contract end date:** `datenotification` + `dureemois` months. Use `dureemoismodification` when it is set. No field holds the end date: compute it. For a framework agreement, the duration is the framework's, not the duration of its call-off orders.
+- `titulairesmodification` set: the holder changed (takeover or failure). `actessoustraitance` set: subcontracting declared. Both are signals in `references/signals.md`.
+- `montantmodification` or `dureemoismodification` higher than the initial value: the contract was extended.
 
 ## `ted`
 
