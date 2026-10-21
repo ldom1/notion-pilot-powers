@@ -1,6 +1,6 @@
 # Signals — scoring, dedup and composites
 
-How to turn the records from `sources.md` into a short, ranked list of signals, and pick the one that carries the hook. Apply it in this order:
+How to turn the records from `sources.md` into a short, ranked list of signals, and pick the main signal and its supporting signals. Apply it in this order:
 
 1. Drop or fix records with "Corrections and annulments".
 2. Merge records of the same event with "Cross-source dedup".
@@ -157,7 +157,8 @@ Rank the signals that are inside their hook window:
 Then:
 
 1. **Veto first,** before you rank. A company closed, in liquidation, or in an active difficulty state gets no positive hook (see "Collective procedure states"). Write the hook line as "No hook: <state> since <date>" and give the next date to check.
-2. **One signal carries the hook:** the highest score. Two or three more go to the hook as context.
-3. **Tie-break:** the newer signal, then the rarer one (a contract renewal beats a press award), then a composite over a single event.
-4. **Cooldown:** if a CRM Activity of the last 90 days already used the same signal type as its hook, take the next signal. Say so in the preview.
-5. Signals outside their window stay in the Signals table as context. Never use them in the hook.
+2. **One main signal:** the highest score. It is the reason to contact the company now, and the hook is built on it.
+3. **Two or three supporting signals:** the next highest scores inside their window. Prefer signals of another type than the main signal: they add a second reason, not a repeat (two contracts won are one reason). If fewer than two qualify, show what exists; never fill the list with signals outside their window.
+4. **Tie-break:** the newer signal, then the rarer one (a contract renewal beats a press award), then a composite over a single event.
+5. **Cooldown:** if a CRM Activity of the last 90 days already used the same signal type as its hook, take the next signal. Say so in the preview.
+6. Signals outside their window stay in the Signals table as context. Never use them as the main or a supporting signal.

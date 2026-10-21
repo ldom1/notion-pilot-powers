@@ -11,7 +11,7 @@ The brief has two outputs:
 
 The reader is a sales rep who prepares a call or an email. Every line must help that.
 
-- Lead with the verdict, then the hook and the interest signals. They are the reason to call now. In the chat preview too, put the verdict and the hook before the working notes.
+- Lead with the verdict, the hook, the main signal and the supporting signals. They are the reason to call now. In the chat preview too, put them before the working notes.
 - One line per bullet. One fact per line. No process notes, no "lessons", no restated rules.
 - Never repeat in the body a value that is in a property (SIREN, NAF, head office, manager, size, revenue).
 - Notion body: at most 25 top-level blocks. Working notes: tables, no prose paragraphs.
@@ -40,7 +40,7 @@ An interest signal is a dated event that gives a reason to contact the company n
 |---|---|---|---|---|---|---|
 
 - **Event date** is the date of the event or the fiscal year. **Public on** is the publication, filing or release date. Keep a signal only when **Public on** is on or before the as-of date.
-- **Strength** is 0–5 from `references/signals.md`. Add "(hook)" to the one signal that carries the hook, and "(context)" to signals outside their hook window.
+- **Strength** is 0–5 from `references/signals.md`. Add "(main)" to the main signal, "(support)" to the supporting signals, and "(context)" to signals outside their hook window.
 - One event, one row: an event seen in several sources gets one row with every reference link.
 - A composite signal is one row. Name its parts in the Signal cell.
 
@@ -106,7 +106,7 @@ Use the procedure state on the as-of date, from "Collective procedure states" in
 One to three sentences, ready to paste in an email. Write it after the qualification.
 
 - Under a veto (closed, liquidation, active difficulty state), write "No hook: <state> since <date>" and the next date to check. Nothing else.
-- Build it on the signal with the highest priority score ("Priority" in `references/signals.md`). Add one or two more signals as context. Never use a signal outside its hook window.
+- Build it on the main signal ("Priority" in `references/signals.md`). Mention one supporting signal at most: the full list follows the hook. Never use a signal outside its hook window.
 - Name the signals in concrete words (a contract and its end month, a partner, a funding round).
 - Never state an inference about a person (age, health, plans). Never congratulate a new manager when the composite says "Departure without replacement".
 - Connect them to the ICP pain that the product solves.
@@ -121,15 +121,19 @@ The body, in the user's language. Example headings in English:
 ## Brief — <AS_OF>
 **Verdict:** <verdict>
 > 💡 Hook: <hook>                                   (callout)
-### Interest signals
-- <YYYY-MM-DD> · <type> · <signal, max 15 words> — [source](<link>)   (max 8, highest priority first)
+### Main signal
+<YYYY-MM-DD> · <type> · <signal, max 20 words> — [source](<link>)
+<why it matters now, one line>
+### Supporting signals
+- <YYYY-MM-DD> · <type> · <signal, max 15 words> — [source](<link>)   (2 or 3, highest priority first)
 ### Qualification — ICP <link to the ICP page>      (page mention when the ICP is a Notion page)
 | ICP criterion | Score | Comment |
 ### Check before contact
 1. <check>                                          (max 5)
 ```
 
-- Signals: keep the ones that matter for the outreach. Fact and Fact (CRM) first; mark an Interpretation with "(interp.)".
+- Signals: the main signal and 2 or 3 supporting signals only. The full Signals table stays in the chat. Mark an Interpretation with "(interp.)".
+- Under a veto, write "Main signal: none" with the veto reason, and no supporting signals.
 - No Identity, Timeline, Claims, Retrieval log or Conflicts section in the body.
 
 ## Notion write
