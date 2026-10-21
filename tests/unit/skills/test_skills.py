@@ -246,3 +246,23 @@ def test_person_data_protection_rules() -> None:
     assert "naming pattern" in skill  # never guess an email
     founder_row = next(ln for ln in person.splitlines() if ln.endswith("| `founder` |"))
     assert "Président" not in founder_row  # a SAS Président is a legal role
+
+
+CRM_OPS = ROOT / "skills" / "crm-ops"
+
+
+def test_crm_ops_follows_the_user_language() -> None:
+    for path in (CRM_OPS / "references").glob("*.md"):
+        text = path.read_text(encoding="utf-8")
+        assert "(FR)" not in text and "| FR |" not in text, path.name
+        assert "French, specific" not in text, path.name
+
+
+@pytest.mark.parametrize("path", sorted(ROOT.glob("skills/*/**/*.md")), ids=lambda p: p.name)
+def test_named_markdown_files_exist(path: Path) -> None:
+    skill = path.relative_to(ROOT / "skills").parts[0]
+    for ref in re.findall(r"`([\w-]+\.md)`", path.read_text(encoding="utf-8")):
+        if ref in ("SKILL.md", "CHANGELOG.md", "README.md", "CONTRIBUTING.md"):
+            continue
+        found = list((ROOT / "skills").glob(f"*/**/{ref}"))
+        assert found, f"{path.relative_to(ROOT)} names missing {ref} ({skill})"

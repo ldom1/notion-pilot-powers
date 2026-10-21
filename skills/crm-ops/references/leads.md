@@ -1,6 +1,6 @@
 # Leads (Deals)
 
-Notion DB title: **💶 Leads**. Parent data source: see `crm-ids.md`. Model: `DealInput`.
+Notion DB title: **💶 Leads** (or **Leads**). Find it by Notion MCP search, or from the local MCP `userConfig`. Model: `DealInput`.
 
 ## Naming
 
@@ -24,7 +24,7 @@ Before you write `Closed Lost`, ask for the reason and put it in `Lost Reason` (
 
 ## Key properties to set on UPDATE
 
-- `Stage`, `Next Step` (FR), `Next Step Date`
+- `Stage`, `Next Step` (in the user's language), `Next Step Date`
 - `Notes` (append facts; source language OK)
 - `Client` (company relation), `Primary contact`, `Contacts`
 - `Probability (%)`, `Value (euros)`, `Expected Close Date` when known
