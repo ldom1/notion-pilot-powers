@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+## [0.8.0] - 2026-10-21
+
 ### Added
 - `company-enrichment` ranks lead signals with `references/signals.md`:
   - Each signal type has a strength (0–5) and a hook window. A signal outside its window is context only.
