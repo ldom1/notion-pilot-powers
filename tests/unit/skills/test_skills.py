@@ -181,7 +181,14 @@ def test_notion_body_stays_short() -> None:
     assert "Never append an addendum" in sections["Concision"]
     text = (ENRICH / "references" / "brief.md").read_text(encoding="utf-8")
     page = text.split("## Notion page", 1)[1].split("## Notion write", 1)[0]
-    assert page.index("Hook") < page.index("Interest signals") < page.index("Qualification")
+    assert (
+        page.index("Hook")
+        < page.index("Main signal")
+        < page.index("Supporting signals")
+        < page.index("Qualification")
+    )
+    priority = _sections(SIGNALS)["Priority"]
+    assert "**One main signal:**" in priority and "supporting signals:**" in priority
     assert "| ICP criterion | Score | Comment |" in page
 
 
