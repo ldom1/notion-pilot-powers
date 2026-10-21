@@ -20,10 +20,18 @@ Two modes:
 
 ## Prerequisites
 
-1. Follow **`crm-ops`** write discipline (preview table, explicit go). Property shapes: `crm-ops/references/people.md`.
-2. Prefer local MCP `search_people` / `upsert_people` dry-run when available.
-3. Without the local MCP, use Notion hosted MCP. Dedup by email, then LinkedIn, then name + company.
-4. Resolve or create the **Company** first (`company-enrichment` / `crm-ops`) when the user names an employer.
+1. A CRM deployed in the user's Notion by the free wizard at https://notion-pilot.com, for writes only. Without a People database, give the result or the contact pick in the chat, and tell the user the wizard can create the CRM.
+2. Follow **`crm-ops`** write discipline (preview table, explicit go). If [`crm-ops`](https://github.com/ldom1/notion-pilot-powers/tree/main/skills/crm-ops) is not installed, the rule still applies: show a preview table and write only after an explicit go. Property shapes: `crm-ops/references/people.md`; without `crm-ops`, read the live People schema.
+3. Prefer local MCP `search_people` / `upsert_people` dry-run when available.
+4. Without the local MCP, use Notion hosted MCP. Dedup by email, then LinkedIn, then name + company.
+5. Resolve or create the **Company** first ([`company-enrichment`](https://github.com/ldom1/notion-pilot-powers/tree/main/skills/company-enrichment) / `crm-ops`) when the user names an employer.
+
+Tested agents: Claude Code, Claude app.
+
+## Network and data
+
+- Public sources only: the company website, public LinkedIn pages found by web search, the French company register (`recherche-entreprises.api.gouv.fr`) and web search. No login, no paid people database. Full list: `references/sources.md`.
+- Queries carry a name, a company or a work email domain only.
 
 ## Fill / create Person
 
