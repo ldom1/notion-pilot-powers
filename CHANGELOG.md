@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+## [0.8.1] - 2026-10-21
+
 ### Changed
 - The lead brief shows one **main signal** (the reason to contact the company now) and 2 or 3 **supporting signals** of other types, in the chat and on the Notion page. The Notion page no longer lists up to 8 signals; the full Signals table stays in the chat.
 
