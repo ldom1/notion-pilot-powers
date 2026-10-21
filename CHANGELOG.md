@@ -2,6 +2,12 @@
 
 ## [Unreleased]
 
+## [0.8.2] - 2026-10-21
+
+### Fixed
+- `crm-ops` writes activity titles and `Next Step` in the user's language. The references forced French, against the skill rule "follow the user; default EN". A workspace overlay can still ask for French.
+- `crm-ops` leads reference no longer points to a `crm-ids.md` file that the skill does not ship. It finds the Leads database by Notion MCP search or the local MCP settings.
+
 ### Added
 - One logo per skill in `assets/logos/` (SVG, and 512 × 512 PNG for marketplace listings), shown in the README.
 

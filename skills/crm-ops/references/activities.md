@@ -14,7 +14,7 @@ Append-only event log. Model: `ActivityInput`. Never “upsert” an activity �
 
 | Field | Notion | Notes |
 |-------|--------|-------|
-| title | `Name` | French, specific (not just “Email”) |
+| title | `Name` | in the user's language, specific (not just “Email”) |
 | type | `Type` | required |
 | date | `Date` | ISO date of the event; defaults to today |
 | duration_min | `Duration (min)` | minutes; optional |
@@ -22,7 +22,7 @@ Append-only event log. Model: `ActivityInput`. Never “upsert” an activity �
 | deal | `Deal` | relation → Lead |
 | person | `Person` | relation → People |
 | company | `Company` | relation → Companies |
-| next_step | `Next Step` | FR |
+| next_step | `Next Step` | in the user's language |
 | next_step_date | `Next Step Date` | |
 | notes | `Notes` | source language OK |
 | done | `Done` | checkbox; tasks only |
