@@ -1,6 +1,6 @@
 [project]
 name = "notion-pilot-powers"
-version = "0.6.1"
+version = "0.7.0"
 description = "CRM core + local MCP for Notion Pilot — skills and tools that run on your machine"
 requires-python = ">=3.12"
 license = { file = "LICENSE" }

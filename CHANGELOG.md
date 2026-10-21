@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+## [0.7.0] - 2026-10-21
+
 ### Added
 - Each GitHub Release has one zip per skill (`crm-ops.zip`, `company-enrichment.zip`, `person-enrichment.zip`) for **Customize → Skills → Upload skill** in the Claude app.
 - `crm-ops` works as a standalone skill (for skill marketplaces such as Agensi): it sends the user to the notion-pilot.com wizard when no CRM exists, skips enrichment when the enrichment skills are absent, and lists its tested agents and network calls.
