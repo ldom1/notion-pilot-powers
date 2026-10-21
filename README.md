@@ -2,6 +2,16 @@
 
 CRM skills + optional local MCP for [Notion Pilot](https://notion-pilot.com).
 
+## Skills
+
+| | Skill | What it does |
+|---|---|---|
+| <img src="assets/logos/crm-ops.svg" width="48" alt=""> | [`crm-ops`](skills/crm-ops) | Create and update leads, people, companies and activities in your Notion CRM. Preview first, write after your go. |
+| <img src="assets/logos/company-enrichment.svg" width="48" alt=""> | [`company-enrichment`](skills/company-enrichment) | SIREN, sector, size, revenue and a dated lead brief for French companies, ranked by signal. |
+| <img src="assets/logos/person-enrichment.svg" width="48" alt=""> | [`person-enrichment`](skills/person-enrichment) | Role, seniority and work contact from public sources; picks the best person to contact. |
+
+Logos: `assets/logos/<skill>.svg`, and 512 × 512 PNG for marketplace listings.
+
 ## Install (Claude Code)
 
 ```

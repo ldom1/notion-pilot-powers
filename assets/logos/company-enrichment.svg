@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
+  <title>company-enrichment</title>
+  <rect width="32" height="32" rx="8" fill="#1C1C1C"/>
+  <path d="M5.6 25.4V7.6c0-1 .8-1.8 1.8-1.8h7.4c1 0 1.8.8 1.8 1.8v6.2" stroke="#fff" stroke-width="1.6" stroke-linejoin="round"/>
+  <path d="M3.8 25.4h9.6" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/>
+  <path d="M8.9 10.2h4.4M8.9 14.4h4.4M8.9 18.6h3" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/>
+  <circle cx="22.2" cy="22.4" r="7.3" fill="#fff"/>
+  <path d="m18.6 25.2 2.6-2.8 1.9 1.8 3.4-3.9" stroke="#1C1C1C" stroke-width="2.05" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M23.9 20.1h2.7v2.7" stroke="#1C1C1C" stroke-width="2.05" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

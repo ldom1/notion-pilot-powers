@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
+  <title>person-enrichment</title>
+  <rect width="32" height="32" rx="8" fill="#1C1C1C"/>
+  <circle cx="11.6" cy="10.4" r="4.2" stroke="#fff" stroke-width="1.6"/>
+  <path d="M4.4 25.2c0-4.3 3.2-7.4 7.2-7.4 .8 0 1.6.1 2.3.4" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/>
+  <circle cx="22.2" cy="22.4" r="7.3" fill="#fff"/>
+  <path d="M22.2 19v6.8M18.8 22.4h6.8" stroke="#1C1C1C" stroke-width="2.05" stroke-linecap="round"/>
+</svg>

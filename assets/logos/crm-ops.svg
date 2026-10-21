@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
+  <title>crm-ops</title>
+  <rect width="32" height="32" rx="8" fill="#1C1C1C"/>
+  <path d="M7.4 8.2v12.2" stroke="#fff" stroke-width="1.6" stroke-linecap="round" opacity=".55"/>
+  <circle cx="7.4" cy="8.2" r="2" fill="#fff"/>
+  <circle cx="7.4" cy="14.3" r="2" fill="#fff"/>
+  <circle cx="7.4" cy="20.4" r="2" fill="#fff"/>
+  <path d="M11.6 8.2h9.2M11.6 14.3h6.4M11.6 20.4h2.6" stroke="#fff" stroke-width="1.7" stroke-linecap="round"/>
+  <circle cx="22.2" cy="22.4" r="7.3" fill="#fff"/>
+  <path d="m19 22.5 2.2 2.3 4.6-5" stroke="#1C1C1C" stroke-width="2.05" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
