@@ -2,6 +2,20 @@
 
 ## [Unreleased]
 
+### Added
+- `company-enrichment` ranks lead signals with `references/signals.md`:
+  - Each signal type has a strength (0–5) and a hook window. A signal outside its window is context only.
+  - A priority score (strength × freshness × confidence × specificity) picks the one signal that carries the hook. The skill skips a hook type that a CRM Activity used in the last 90 days.
+  - One event seen in several sources (for example a BOAMP award and its DECP record, or press funding and the BODACC capital change) is one row with all links.
+  - New composite signals from the same open sources: contract renewal due (DECP end date = notification + duration), confirmed funding, full takeover, first public contract, contract machine, contract lost, exit from crisis, external vs internal merger, silent pre-distress, and a "replacement vs departure" check.
+- The Signals table of the brief has a `Strength` column.
+- `person-enrichment` ranks a person appointed to a buying role less than 100 days ago first in a contact pick.
+
+### Fixed
+- BODACC corrections and annulments are applied: an annulled notice is no longer reported as a Fact.
+- Collective procedures map to states from the judgment nature. A positive exit (« extinction du passif », end of the procedure) no longer blocks the verdict; a running plan still gives Hold.
+- BOAMP wins are also searched by the winner's name: the SIRET in an award notice is usually the buyer's.
+
 ## [0.7.0] - 2026-10-21
 
 ### Added

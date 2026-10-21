@@ -45,7 +45,7 @@ Tested agents: Claude Code, Claude app.
 
 ## Lead brief
 
-Sources: `references/sources.md`. Output: `references/brief.md`.
+Sources: `references/sources.md`. Scoring, dedup and composites: `references/signals.md`. Output: `references/brief.md`.
 
 1. Get the as-of date. If the user gives none, use today. Reject a future date.
 2. Confirm the identity. Use the SIREN first: from the user, the Notion page, `lookup_siren`, or recherche-entreprises. If a name matches more than one company, apply the stop rule in `references/brief.md`.
@@ -54,9 +54,10 @@ Sources: `references/sources.md`. Output: `references/brief.md`.
 5. If the brief is for a Notion Company (or the user names a CRM company), query the **`crm`** source in `references/sources.md` **before** you mark any buying need, compute need, or outreach signal as Unknown. Read linked Leads, Activities and Meetings.
 6. Query each other source in `references/sources.md`. Apply its as-of filter. Log every attempt in the retrieval log.
 7. Record each interest signal with its label (Fact, Interpretation, Unknown), event date, public date and reference link.
-8. List conflicts, stale data and failed retrievals. Then score each ICP criterion with evidence. CRM claims override an open-data "Unknown" on the same topic.
-9. Write the hook from the strongest signals and the ICP pain.
-10. Write the brief in the user's language, with the template in `references/brief.md`. Offer the Notion write.
+8. Apply `references/signals.md` in its order: drop annulled notices and apply corrections, merge the same event across sources, set the procedure state, compute the composite signals, give each signal its strength and hook window, then rank by priority score.
+9. List conflicts, stale data and failed retrievals. Then score each ICP criterion with evidence. CRM claims override an open-data "Unknown" on the same topic.
+10. Write the hook from the top-ranked signal and the ICP pain.
+11. Write the brief in the user's language, with the template in `references/brief.md`. Offer the Notion write.
 
 ## Rules
 
