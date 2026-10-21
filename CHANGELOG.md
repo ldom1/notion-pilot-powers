@@ -4,6 +4,15 @@
 
 ### Added
 - Each GitHub Release has one zip per skill (`crm-ops.zip`, `company-enrichment.zip`, `person-enrichment.zip`) for **Customize → Skills → Upload skill** in the Claude app.
+- `crm-ops` works as a standalone skill (for skill marketplaces such as Agensi): it sends the user to the notion-pilot.com wizard when no CRM exists, skips enrichment when the enrichment skills are absent, and lists its tested agents and network calls.
+- `crm-ops` links `company-enrichment` and `person-enrichment` and says which fields each one fills.
+- `company-enrichment` and `person-enrichment` work without `crm-ops` and without a CRM: they keep the preview-then-go rule, and give the result in the chat when no database exists. Each lists its tested agents and public sources.
+
+### Changed
+- Plugin `homepage` is now https://notion-pilot.com (was the GitHub repo).
+
+### Fixed
+- `crm-ops` companies reference points to `notion_pilot_powers/core/siren_lookup.py` (the old path did not exist).
 
 ## [0.6.1] - 2026-10-13
 

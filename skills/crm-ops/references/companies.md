@@ -1,6 +1,6 @@
 # Companies
 
-Ground truth: `CompanyRecord` in `notion_pilot_powers/mcp/models.py`; SIREN helpers in `notion_pilot/shared/siren_lookup.py`.
+Ground truth: `CompanyRecord` in `notion_pilot_powers/mcp/models.py`; SIREN helpers in `notion_pilot_powers/core/siren_lookup.py`.
 
 ## Strongly expected fields (always attempt)
 

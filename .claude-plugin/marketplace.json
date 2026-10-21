@@ -12,7 +12,7 @@
       "description": "Operate a Notion CRM from Claude: create and update leads, log activities, enrich people and companies. Always shows a validation table and waits for an explicit go before writing.",
       "source": "./",
       "category": "productivity",
-      "homepage": "https://github.com/ldom1/notion-pilot-powers"
+      "homepage": "https://notion-pilot.com"
     }
   ]
 }

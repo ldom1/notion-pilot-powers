@@ -13,10 +13,22 @@ Generic CRM operations for a Notion Pilot-deployed workspace. **No workspace nam
 
 ## Prerequisites
 
-1. **Notion hosted MCP** authenticated (default path). If missing → stop and ask the user to connect it.
-2. Optional **local `notion-pilot-powers` MCP** for dry-run upserts, dedup, `lookup_siren`.
+1. **CRM deployed** in the user's Notion by the free wizard at https://notion-pilot.com. If no Leads / People / Companies databases exist → stop and send the user there.
+2. **Notion hosted MCP** authenticated (default path). If missing → stop and ask the user to connect it.
+3. Optional **local `notion-pilot-powers` MCP** for dry-run upserts, dedup, `lookup_siren`. Install: https://github.com/ldom1/notion-pilot-powers.
+4. Optional skills for enrichment. If they are not installed, do not enrich: leave the fields empty, list them under `needs_review`, and tell the user which skill fills them.
+   - [`company-enrichment`](https://github.com/ldom1/notion-pilot-powers/tree/main/skills/company-enrichment): SIREN, sector, size, revenue and a lead brief for French companies.
+   - [`person-enrichment`](https://github.com/ldom1/notion-pilot-powers/tree/main/skills/person-enrichment): role, seniority and work contact for a person, from public sources.
+
+Tested agents: Claude Code, Claude app.
 
 Before a write, read the live schema of each database you touch (property names, types, select options). Write only existing select options; if a value has no option, show it and ask.
+
+## Network and data
+
+- This skill calls only the MCP servers above. It never calls an API directly.
+- CRM records stay in the user's Notion. notion-pilot.com keeps no CRM records and no Notion token.
+- The local MCP `lookup_siren` tool queries the French government company register (`recherche-entreprises.api.gouv.fr`) with company names only. No token is sent.
 
 ## Hard rules
 

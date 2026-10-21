@@ -22,10 +22,18 @@ Two modes:
 
 ## Prerequisites
 
-1. Follow **`crm-ops`** write discipline (preview table, explicit go).
-2. Prefer local MCP `lookup_siren` / `upsert_companies` dry-run when available.
-3. Without the local MCP, use Notion hosted MCP, and query `recherche-entreprises.api.gouv.fr` directly (see `references/sources.md`).
-4. If the code sandbox has no network (Claude app), use web search or web fetch on `annuaire-entreprises.data.gouv.fr/entreprise/<SIREN>`. Log the blocked sources as "not available" in the retrieval log.
+1. A CRM deployed in the user's Notion by the free wizard at https://notion-pilot.com, for writes only. Without a Companies database, give the lead brief or the firmographics in the chat, and tell the user the wizard can create the CRM.
+2. Follow **`crm-ops`** write discipline (preview table, explicit go). If [`crm-ops`](https://github.com/ldom1/notion-pilot-powers/tree/main/skills/crm-ops) is not installed, the rule still applies: show a preview table and write only after an explicit go.
+3. Prefer local MCP `lookup_siren` / `upsert_companies` dry-run when available.
+4. Without the local MCP, use Notion hosted MCP, and query `recherche-entreprises.api.gouv.fr` directly (see `references/sources.md`).
+5. If the code sandbox has no network (Claude app), use web search or web fetch on `annuaire-entreprises.data.gouv.fr/entreprise/<SIREN>`. Log the blocked sources as "not available" in the retrieval log.
+
+Tested agents: Claude Code, Claude app.
+
+## Network and data
+
+- Public sources only, no account and no token: French company register (`recherche-entreprises.api.gouv.fr`, `annuaire-entreprises.data.gouv.fr`), BODACC and BOAMP (`*-datadila.opendatasoft.com`), DECP (`data.economie.gouv.fr`), TED and CORDIS (`europa.eu`), ADEME (`data.ademe.fr`), and press found by web search. Full list: `references/sources.md`.
+- Queries carry a company name or SIREN only. No CRM record leaves the user's Notion except through the user's assistant.
 
 ## Fill firmographics
 
